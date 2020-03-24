@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # [Vue Material Dashboard](https://demos.creative-tim.com/vue-material-dashboard) [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&logo=twitter)](https://twitter.com/home?status=Vue%20Material%20Dashboard,%20a%20free%20Material%20Admin%20Template%20%E2%9D%A4%EF%B8%8F%20https%3A//bit.ly/2Nh5aVy%20%20%23vue%20%23material%20%23design%20%23developers%20%23freebie%20%20via%20%40CreativeTim)
 
 
@@ -197,3 +198,39 @@ Dribbble: <https://dribbble.com/creativetim>
 Google+: <https://plus.google.com/+CreativetimPage>
 
 Instagram: <https://www.instagram.com/CreativeTimOfficial>
+=======
+# front-app
+
+## Project setup
+```
+npm install
+```
+
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Run your unit tests
+```
+npm run test:unit
+```
+
+### Run your end-to-end tests
+```
+npm run test:e2e
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
+>>>>>>> 20bcb9c87ed34a4a84d13d9f9051ebfc4a90f59d
