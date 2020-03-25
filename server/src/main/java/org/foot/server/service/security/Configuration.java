@@ -1,12 +1,12 @@
-package org.foot.server.security;
+package org.foot.server.service.security;
 
-import org.foot.server.security.Filter.JwtAuthenticationFilter;
+import org.foot.server.service.security.Filter.CustomUserDetailService;
+import org.foot.server.service.security.Filter.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -15,6 +15,9 @@ public class Configuration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private MyAuthenticationEntryPoint unauthorizedHandler;
+
+    @Autowired
+    private CustomUserDetailService customUserDetailService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -31,10 +34,7 @@ public class Configuration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-        authenticationManagerBuilder.inMemoryAuthentication()
-                .withUser("user")
-                .password(passwordEncoder().encode("123456789"))
-                .authorities("ROLE_USER");
+        authenticationManagerBuilder.userDetailsService(customUserDetailService).passwordEncoder(passwordEncoder());
     }
 
     @Bean

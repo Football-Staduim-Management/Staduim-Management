@@ -1,4 +1,4 @@
-package org.foot.server.security.Filter;
+package org.foot.server.service.security.Filter;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -35,7 +35,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         response.sendRedirect("private");
-        //filterChain.doFilter(request, response);
     }
 
 
