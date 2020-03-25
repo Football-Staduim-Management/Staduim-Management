@@ -2,9 +2,10 @@
   <md-card>
     <md-card-header
       class="card-chart"
+      style="background-color: white; height: 20%"
       :data-background-color="dataBackgroundColor"
     >
-      <div :id="chartId" class="ct-chart"></div>
+      <slot name="header"></slot>
     </md-card-header>
 
     <md-card-content>
@@ -55,7 +56,7 @@ export default {
     },
     dataBackgroundColor: {
       type: String,
-      default: ""
+      default: "white"
     }
   },
   data() {
