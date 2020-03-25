@@ -23,9 +23,9 @@ public class Controller {
         return "private";
     }
 
-    @GetMapping("/api/public")
-    public String getMessagePublic(@RequestBody User user){
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user).toString();
-    }
+//    @GetMapping("/api/public")
+//    public String getMessagePublic(@RequestBody User user){
+//        user.setPassword(passwordEncoder.encode(user.getPassword()));
+//        return userRepository.save(user).toString();
+//    }
 }

@@ -27,4 +27,5 @@ public class User {
     private @NotNull String password;
     @Column(name="Admin_Role")
     private @NotNull boolean isAdmin;
+
 }
