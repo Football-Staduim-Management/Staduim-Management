@@ -6,7 +6,6 @@ import org.foot.server.model.User;
 import org.foot.server.model.mapper.UserToUserDtoMapper;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,7 +15,10 @@ public class UserManagmentService {
 
     UserToUserDtoMapper userToUserDtoMapper = Mappers.getMapper(UserToUserDtoMapper.class);
 
-    public UserDto creatUser(UserDto userDto){
+    public UserDto creatUser(UserDto userDto) throws Exception{
+        if(userRepository.findByEmail(userDto.getEmail())!=null){
+            throw new Exception("User already exist");
+        }
         return userToUserDtoMapper.UsertoUserDto(userRepository.save(userToUserDtoMapper.UserDtotoUser(userDto)));
     }
 

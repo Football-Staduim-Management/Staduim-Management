@@ -1,6 +1,5 @@
 package org.foot.server.service.security.Filter;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.foot.server.model.User;
@@ -36,7 +35,7 @@ public class CustomUserDetail implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.user.getName();
+        return this.user.getEmail();
     }
 
     @Override

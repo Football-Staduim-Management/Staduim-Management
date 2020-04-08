@@ -1,8 +1,10 @@
 package org.foot.server.controller;
 
 import org.foot.server.model.DTO.UserDto;
+import org.foot.server.model.User;
 import org.foot.server.service.subscription.UserManagmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,8 +26,15 @@ public class UserManagementController {
     }
 
     @PutMapping("/user/put")
-    public ResponseEntity<UserDto> putUser(@RequestBody UserDto userDto){
-        return  ResponseEntity.ok(userManagmentService.creatUser(userDto));
+    public ResponseEntity<?> putUser(@RequestBody UserDto userDto){
+
+        UserDto userDto1= null;
+        try {
+            userDto1 = userManagmentService.creatUser(userDto);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        }
+        return   ResponseEntity.status(HttpStatus.CREATED).body(userDto1);
     }
 
     @DeleteMapping("/user/delet")
