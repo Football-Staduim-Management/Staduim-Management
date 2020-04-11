@@ -24,6 +24,9 @@
               "src/assets"
             ],
             "styles": [
+              
+              
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -119,6 +122,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "Afront"
+    }
+  },
+  "defaultProject": "Afront",
+  "cli": {
+    "analytics": "9655d190-c42f-4f90-a0fd-efe606b76343"
+  }
 }

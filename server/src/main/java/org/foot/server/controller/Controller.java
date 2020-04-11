@@ -5,6 +5,7 @@ import org.foot.server.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,8 +20,9 @@ public class Controller {
     PasswordEncoder passwordEncoder;
 
     @GetMapping("/api/private")
-    public String getMessagePrivate(){
-        return "private";
+    public User getMessagePrivate(){
+        User user =(User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return user;
     }
 
 //    @GetMapping("/api/public")

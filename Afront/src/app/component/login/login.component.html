@@ -1,0 +1,92 @@
+<!--<div class="login d-flex justify-content-center">
+    <div class="card">
+
+
+
+        <div class="card-body px-lg-5 pt-0">
+
+            <form #form="ngForm" (ngSubmit)="login(form.value)" class="text-center" style="color: #757575;" action="#!">
+
+                <div class="md-form">
+                    <input type="email" id="materialLoginFormEmail" name="email" ngModel class="form-control">
+                    <label for="form1" class="">Email</label>
+                </div>
+
+                <div class="md-form">
+                    <input type="password" id="materialLoginFormPassword" name="password" ngModel class="form-control">
+                    <label for="form1" class="">Password</label>
+                </div>
+
+                <div class="d-flex justify-content-around">
+                    <div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="materialLoginFormRemember">
+                            <label class="form-check-label" for="materialLoginFormRemember">Remember me</label>
+                        </div>
+                    </div>
+                    <div>
+                        <a href="">Forgot password?</a>
+                    </div>
+                </div>
+
+                <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0"
+                    type="submit">Sign in</button>
+
+                <p>Not a member?
+                    <a href="">Register</a>
+                </p>
+
+                <p>or sign in with:</p>
+                <a type="button" class="btn-floating btn-fb btn-sm">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a type="button" class="btn-floating btn-tw btn-sm">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a type="button" class="btn-floating btn-li btn-sm">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a type="button" class="btn-floating btn-git btn-sm">
+                    <i class="fab fa-github"></i>
+                </a>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+<br>
+<div class="alert alert-danger d-flex justify-content-center" role="alert" *ngIf="authError">
+    {{authErrorMessage}}
+</div>-->
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    
+    <!-- Login Form -->
+    <form #form="ngForm" (ngSubmit)="login(form.value)">
+
+        <input type="text" id="login" class="fadeIn second" name="email"  ngModel placeholder="login">
+        <input type="password" id="password" class="fadeIn third" name="password" ngModel placeholder="password">
+        <input type="submit" class="fadeIn fourth" value="Log In">
+    </form>
+
+    <!-- Remind Passowrd -->
+    <div id="formFooter">
+      <a class="underlineHover" href="#">Forgot Password?</a>
+    </div>
+
+  </div>
+  <div class="alert alert-danger alert-dismissable" *ngIf="authError">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <strong>Error !</strong> {{authErrorMessage}}.
+</div>
+</div>
+
