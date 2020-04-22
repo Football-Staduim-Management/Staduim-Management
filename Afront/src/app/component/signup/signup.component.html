@@ -17,42 +17,41 @@
                     <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                 </div>
                 <input name="name" ngModel class="form-control" placeholder="Full name" type="text">
-            </div>
+            </div> <!-- form-group// -->
             <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                 </div>
                 <input id="login" name="email" ngModel class="form-control" placeholder="email" type="text" #email>
-            </div>
+            </div> <!-- form-group// -->
             <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
                 </div>
+
                 <input name="phone" ngModel class="form-control" placeholder="Phone number" type="text">
-            </div>
+            </div> <!-- form-group// -->
+
             <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                 </div>
-                <input id="password" [formControl]="password"  class="form-control"
-                    placeholder="Create password" type="password" [appMdpValidator]="password.value">
-            </div>
+                <input name="password" ngModel class="form-control" placeholder="Create password" type="password">
+            </div> <!-- form-group// -->
             <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                 </div>
-                <input Class="form-control" placeholder="Repeat password" type="password" name="password" ngModel
-                    #repassword>
-            </div>
-            <div class="form-group" *ngIf="!password.invalid && password.touched">
+                <input class="form-control" placeholder="Repeat password" type="password">
+            </div> <!-- form-group// 56baed-->
+            <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-block"> Create Account </button>
-            </div>
+            </div> <!-- form-group// -->
             <p class="text-center">Have an account? <a routerLink="/login">Log In</a> </p>
         </form>
     </article>
     <div class="alert alert-danger alert-dismissable" *ngIf="showError">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
         <strong>Error !</strong> {{error}}.
-    </div>
-
-</div>
+      </div>
+</div> <!-- card.// --> 
