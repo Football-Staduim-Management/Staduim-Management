@@ -6,25 +6,33 @@ import org.foot.server.service.subscription.UserManagmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin
+
 @RestController
+@CrossOrigin(origins = "*")
 public class UserManagementController {
 
     @Autowired
     UserManagmentService userManagmentService;
 
+
+
     @GetMapping("/user/get")
-    public ResponseEntity<UserDto> getUser(@RequestBody(required = false)  String email){
-        return ResponseEntity.ok(email == null ? userManagmentService.connectedUser() :userManagmentService.readUser(email));
+    public ResponseEntity<UserDto> getUser(@RequestParam(required = false) String email){
+        SecurityContext sc = SecurityContextHolder.getContext();
+        User user = (User)sc.getAuthentication().getPrincipal();
+
+        return ResponseEntity.ok(email == null ? userManagmentService.connectedUser(user):userManagmentService.readUser(email));
     }
 
     @PostMapping("/user/post")
     public ResponseEntity<UserDto> postUser(@RequestBody UserDto userDto){
         return  ResponseEntity.ok(userManagmentService.updateUser(userDto));
     }
+
 
     @PutMapping("/user/put")
     public ResponseEntity<?> putUser(@RequestBody UserDto userDto){
@@ -43,3 +51,7 @@ public class UserManagementController {
         userManagmentService.deleteUser(userDto);
     }
 }
+
+
+
+

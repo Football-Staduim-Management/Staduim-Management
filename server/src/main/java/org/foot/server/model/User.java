@@ -21,6 +21,8 @@ public class User {
     private  @NotNull String name;
     @Column(name="User_Email")
     private @NotNull String email;
+    @Column(name = "phone")
+    private String phone;
     @Column(name="User_Pwd")
     private @NotNull String password;
     @Column(name="Admin_Role")

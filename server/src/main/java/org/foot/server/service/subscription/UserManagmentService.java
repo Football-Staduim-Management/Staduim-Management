@@ -4,14 +4,18 @@ import org.foot.server.DAL.UserRepository;
 import org.foot.server.model.DTO.UserDto;
 import org.foot.server.model.User;
 import org.foot.server.model.mapper.UserToUserDtoMapper;
+import org.foot.server.service.security.Filter.AdapterFilter;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
 
 @Service
-public class UserManagmentService {
+public class UserManagmentService extends AdapterFilter {
     @Autowired
     UserRepository userRepository;
     @Autowired
@@ -43,8 +47,11 @@ public class UserManagmentService {
         return userToUserDtoMapper.UsertoUserDto(userRepository.findByEmail(email));
     }
 
-    public UserDto connectedUser(){
-        return userToUserDtoMapper.UsertoUserDto((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+    public UserDto connectedUser(User user){
+        return userToUserDtoMapper.UsertoUserDto(user);
     }
+
+
+
 
 }
