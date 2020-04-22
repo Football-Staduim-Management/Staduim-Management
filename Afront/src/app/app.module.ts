@@ -4,7 +4,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './component/login/login.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UserService } from './services/user.service';
 import { LoginService } from './services/login.service';
@@ -22,6 +22,7 @@ import { SearchComponent } from './component/search/search.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AgmCoreModule } from '@agm/core';
 import { PropositionsComponent } from './component/propositions/propositions.component';
+import { MdpValidatorDirective } from './Directives/mdp-validator.directive'
 
 @NgModule({
   declarations: [
@@ -29,13 +30,15 @@ import { PropositionsComponent } from './component/propositions/propositions.com
     LoginComponent,
     SignupComponent,
     SearchComponent,
-    PropositionsComponent
+    PropositionsComponent,
+    MdpValidatorDirective
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MDBBootstrapModule.forRoot(),
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     StoreModule.forRoot({currentUser: reducer}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),

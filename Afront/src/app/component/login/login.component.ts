@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
       this.rendere.setAttribute(this.email.nativeElement,"placeholder",
       this.userService.currentUser.email===""?  "email":this.userService.currentUser.email)
       
+      this.rendere.setValue( this.email.nativeElement,this.userService.currentUser.email===""?  "email":this.userService.currentUser.email)
   }
 
 
