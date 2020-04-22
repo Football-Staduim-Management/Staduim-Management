@@ -4,7 +4,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './component/login/login.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UserService } from './services/user.service';
 import { LoginService } from './services/login.service';
@@ -16,19 +16,22 @@ import { LoginInterceptorService } from './services/interceptors/login-intercept
 import { RouterModule } from '@angular/router';
 
 import {routes} from "./app.router";
-import { SignupComponent } from './component/signup/signup.component'
+import { SignupComponent } from './component/signup/signup.component';
+import { MdpValidatorDirective } from './Directives/mdp-validator.directive'
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    MdpValidatorDirective
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MDBBootstrapModule.forRoot(),
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     StoreModule.forRoot({currentUser: reducer}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),

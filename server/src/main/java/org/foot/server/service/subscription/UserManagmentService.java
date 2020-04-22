@@ -24,7 +24,7 @@ public class UserManagmentService extends AdapterFilter {
     UserToUserDtoMapper userToUserDtoMapper = Mappers.getMapper(UserToUserDtoMapper.class);
 
     public UserDto creatUser(UserDto userDto) throws Exception{
-        if(userRepository.findByEmail(userDto.getEmail())!=null){
+        if(userRepository.findByEmail(userDto.getEmail())!=null || userRepository.findByPhone(userDto.getPhone())!=null){
             throw new Exception("User already exist");
         }
         userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
