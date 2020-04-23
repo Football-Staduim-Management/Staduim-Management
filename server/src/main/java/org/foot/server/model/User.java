@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Getter
 @Setter
@@ -29,5 +30,7 @@ public class User {
     private @NotNull boolean isAdmin;
     @ManyToOne(cascade = CascadeType.ALL)
     private Offer offer;
+    @OneToMany(mappedBy = "userManager")
+    private List<Stadium> stadium;
 
 }

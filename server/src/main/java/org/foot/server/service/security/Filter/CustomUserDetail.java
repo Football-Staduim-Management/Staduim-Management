@@ -15,7 +15,7 @@ public class CustomUserDetail extends User implements UserDetails  {
 
 
     public CustomUserDetail(User user){
-        super(user.getId(),user.getName(),user.getEmail(), user.getPhone(),user.getPassword(),false,null);
+        super(user.getId(),user.getName(),user.getEmail(), user.getPhone(),user.getPassword(),user.isAdmin(),user.getOffer(),user.getStadium());
 
     }
 

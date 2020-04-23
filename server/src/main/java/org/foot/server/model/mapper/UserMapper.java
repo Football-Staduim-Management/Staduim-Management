@@ -5,7 +5,7 @@ import org.foot.server.model.User;
 import org.mapstruct.Mapper;
 
 @Mapper
-public interface UserToUserDtoMapper {
+public interface UserMapper {
     User UserDtotoUser(UserDto userDto);
     UserDto UsertoUserDto(User user);
 }
