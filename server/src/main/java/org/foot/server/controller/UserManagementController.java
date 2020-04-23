@@ -2,7 +2,7 @@ package org.foot.server.controller;
 
 import org.foot.server.model.DTO.UserDto;
 import org.foot.server.model.User;
-import org.foot.server.service.subscription.UserManagmentService;
+import org.foot.server.service.UserManagmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

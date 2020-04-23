@@ -1,57 +1,50 @@
-package org.foot.server.service.subscription;
+package org.foot.server.service;
 
 import org.foot.server.DAL.UserRepository;
 import org.foot.server.model.DTO.UserDto;
 import org.foot.server.model.User;
-import org.foot.server.model.mapper.UserToUserDtoMapper;
+import org.foot.server.model.mapper.UserMapper;
 import org.foot.server.service.security.Filter.AdapterFilter;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.request.RequestContextHolder;
 
 @Service
-public class UserManagmentService extends AdapterFilter {
+public class UserManagmentService  {
     @Autowired
     UserRepository userRepository;
     @Autowired
     PasswordEncoder passwordEncoder;
 
-    UserToUserDtoMapper userToUserDtoMapper = Mappers.getMapper(UserToUserDtoMapper.class);
+    UserMapper userMapper = Mappers.getMapper(UserMapper.class);
 
     public UserDto creatUser(UserDto userDto) throws Exception{
         if(userRepository.findByEmail(userDto.getEmail())!=null || userRepository.findByPhone(userDto.getPhone())!=null){
             throw new Exception("User already exist");
         }
         userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        return userToUserDtoMapper.UsertoUserDto(userRepository.save(userToUserDtoMapper.UserDtotoUser(userDto)));
+        return userMapper.UsertoUserDto(userRepository.save(userMapper.UserDtotoUser(userDto)));
     }
 
     public UserDto updateUser(UserDto userDto){
-        User user = userToUserDtoMapper.UserDtotoUser(userDto);
+        User user = userMapper.UserDtotoUser(userDto);
         if(userDto.getId()==null){
             user = userRepository.findByEmail(userDto.getEmail());
         }
-        return userToUserDtoMapper.UsertoUserDto(userRepository.save(user));
+        return userMapper.UsertoUserDto(userRepository.save(user));
     }
 
     public void deleteUser(UserDto userDto){
-        userRepository.delete(userToUserDtoMapper.UserDtotoUser(userDto));
+        userRepository.delete(userMapper.UserDtotoUser(userDto));
     }
 
     public UserDto readUser(String email){
-        return userToUserDtoMapper.UsertoUserDto(userRepository.findByEmail(email));
+        return userMapper.UsertoUserDto(userRepository.findByEmail(email));
     }
 
     public UserDto connectedUser(User user){
-        return userToUserDtoMapper.UsertoUserDto(user);
+        return userMapper.UsertoUserDto(user);
     }
-
-
-
 
 }
