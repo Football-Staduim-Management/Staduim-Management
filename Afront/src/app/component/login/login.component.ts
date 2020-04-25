@@ -19,8 +19,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   authErrorMessage: string
   @ViewChild("email") email: ElementRef
   @ViewChild("password") password: ElementRef
-
-  array= [];
+  
   
   constructor(
     private loginService: LoginService,
@@ -33,6 +32,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
       this.rendere.setAttribute(this.email.nativeElement,"placeholder",
       this.userService.currentUser.email===""?  "email":this.userService.currentUser.email)
+      
   }
 
 

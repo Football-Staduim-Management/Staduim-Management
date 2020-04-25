@@ -9,6 +9,7 @@
 
 
 <div class="wrapper fadeInDown">
+    <h3 class="title">Je crée mon compte :</h3>
     <article class="card-body mx-auto" style="max-width: 400px;">
 
         <form #signUpform="ngForm" (ngSubmit)="signup(signUpform.value)">
@@ -47,7 +48,7 @@
             <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-block"> Create Account </button>
             </div> <!-- form-group// -->
-            <p class="text-center">Have an account? <a routerLink="/login">Log In</a> </p>
+            
         </form>
     </article>
     <div class="alert alert-danger alert-dismissable" *ngIf="showError">

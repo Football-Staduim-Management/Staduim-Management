@@ -1,0 +1,178 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+
+<div class="wrapper">
+    <div *ngIf="zone">
+        <br>
+        <br>
+        <h2 class="d-flex justify-content-center">Où voulez-vous Jouer ?</h2>
+        <br>
+        <article class="card-body mx-auto" style="max-width: 600px;">
+
+            <div class="input-group input-group-lg">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-lg"><i class="fa fa-map-pin"></i></span>
+                </div>
+                <input #search class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm"
+                    (keydown.enter)="$event.preventDefault()" placeholder="Search Nearest Location" autocorrect="off"
+                    [(ngModel)]="address" [value]="address" autocapitalize="off" spellcheck="off">
+            </div>
+            <br>
+            <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+                <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true"
+                    (dragEnd)="markerDragEnd($event)"></agm-marker>
+                <agm-circle [latitude]="latitude" [longitude]="longitude" [(radius)]="circleRadius"
+                    [fillColor]="'blue'" [circleDraggable]="true" [editable]="true" ></agm-circle>
+            </agm-map>
+
+            <hr>
+            <a class="flex flex-1 no-hover nav-link text-primary" id="date" (click)="onShowDate()">{{dateString}} à
+                {{timeString}}</a>
+            <hr>
+            <ul class="kirk-items-list sc-kEYyzF jniJZ" role="">
+                <li class="kirk-items-list-item"><a type="button"
+                        class="kirk-item kirk-item--clickable sc-chPdSV wHelH kirk-item-choice"
+                        href="/search?fn=Paris%2C%20France&amp;fc=48.856614%2C2.352221&amp;fcc=FR&amp;formatted_from=Paris&amp;tn=Tunis%2C%20Tunisie&amp;tc=36.806494%2C10.181531&amp;tcc=TN&amp;formatted_to=Tunis&amp;departure_location_id=eyJpIjoiQ2hJSkQ3ZmlCaDl1NWtjUllKU01hTU9DQ3dRIiwicCI6MSwidiI6MSwidCI6W119&amp;arrival_location_id=eyJpIjoiQ2hJSlFfVi1Ybjh6X1JJUmRRSktjVTZTY2RZIiwicCI6MSwidiI6MSwidCI6W119&amp;departure_city=Paris&amp;arrival_city=Tunis&amp;seats=1"><span
+                            class="kirk-item-leftAddon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                                class="kirk-icon sc-bZQynM ehECGS" width="24" height="24" aria-hidden="true"
+                                fill="#708C91">
+                                <g fill="none" fill-rule="evenodd">
+                                    <path d="M0 0h24v24H0z"></path>
+                                    <g stroke="#708C91" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="9.565"></circle>
+                                        <path d="M12 6.783V12h5.217"></path>
+                                    </g>
+                                </g>
+                            </svg></span><span class="kirk-item-leftText"><span
+                                class="kirk-text kirk-text-title sc-bdVaJa dFybSt" style="color: rgb(5, 71, 82);">Paris
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                                    class="kirk-icon sc-bZQynM ehECGS pt-s" width="16" height="16" aria-hidden="true"
+                                    fill="#054752">
+                                    <g fill="none" stroke="#054752" stroke-width="2" stroke-miterlimit="10"
+                                        stroke-linejoin="round" stroke-linecap="round" transform="rotate(180 12 12)">
+                                        <path d="M22 12H2"></path>
+                                        <path d="M9 19l-7-7 7-7"></path>
+                                    </g>
+                                </svg> Tunis</span><span
+                                class="kirk-text kirk-text-body sc-bdVaJa dFybSt kirk-item-body"
+                                style="color: rgb(112, 140, 145);">1 passager</span></span><span
+                            class="kirk-item-rightAddon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                                class="kirk-icon sc-bZQynM ehECGS" width="24" height="24" aria-hidden="true"
+                                fill="#708C91">
+                                <polyline fill="none" stroke="#708C91" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" stroke-miterlimit="10" points="9 18 15 12 9 6"></polyline>
+                            </svg></span></a>
+                    <div class="sc-hMqMXs cpGWPm" aria-hidden="true"></div>
+                </li>
+                <hr>
+                <li class="kirk-items-list-item"><a type="button"
+                        class="kirk-item kirk-item--clickable sc-chPdSV wHelH kirk-item-choice"
+                        href="/search?fn=A%C3%A9roport%20Lyon%20Saint-Exup%C3%A9ry%2C%2069125%20Colombier-Saugnieu%2C%20France&amp;fc=45.712578%2C5.073449&amp;fcc=FR&amp;fp=1&amp;formatted_from=A%C3%A9roport%20Lyon%20Saint-Exup%C3%A9ry%2C%20Colombier-Saugnieu&amp;tn=Lyon%2C%20France&amp;tc=45.764043%2C4.835659&amp;tcc=FR&amp;formatted_to=Lyon&amp;departure_location_id=eyJpIjoiRWpsQnc2bHliM0J2Y25RZ1RIbHZiaUJUWVdsdWRDMUZlSFZ3dzZseWVTd2dRMjlzYjIxaWFXVnlMVk5oZFdkdWFXVjFMQ0JHY21GdVkyVWlMaW9zQ2hRS0VnbW52UVhkS3NfMFJ4SGlDYnI2Vk50RWN4SVVDaElKOHlNNGpFako5RWNSZDUzcEo2MVE3R1EiLCJwIjoxLCJ2IjoxLCJ0IjpbMV19&amp;arrival_location_id=eyJpIjoiQ2hJSmw0Zm9hbEhxOUVjUjhDRzc1Q3FyQ0FRIiwicCI6MSwidiI6MSwidCI6W119&amp;departure_city=Colombier-Saugnieu&amp;arrival_city=Lyon"><span
+                            class="kirk-item-leftAddon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                                class="kirk-icon sc-bZQynM ehECGS" width="24" height="24" aria-hidden="true"
+                                fill="#708C91">
+                                <g fill="none" fill-rule="evenodd">
+                                    <path d="M0 0h24v24H0z"></path>
+                                    <g stroke="#708C91" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="9.565"></circle>
+                                        <path d="M12 6.783V12h5.217"></path>
+                                    </g>
+                                </g>
+                            </svg></span><span class="kirk-item-leftText"><span
+                                class="kirk-text kirk-text-title sc-bdVaJa dFybSt"
+                                style="color: rgb(5, 71, 82);">Aéroport
+                                Lyon Saint-Exupéry, Colombier-Saugnieu <svg viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg" class="kirk-icon sc-bZQynM ehECGS pt-s"
+                                    width="16" height="16" aria-hidden="true" fill="#054752">
+                                    <g fill="none" stroke="#054752" stroke-width="2" stroke-miterlimit="10"
+                                        stroke-linejoin="round" stroke-linecap="round" transform="rotate(180 12 12)">
+                                        <path d="M22 12H2"></path>
+                                        <path d="M9 19l-7-7 7-7"></path>
+                                    </g>
+                                </svg> Lyon</span></span><span class="kirk-item-rightAddon"><svg viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg" class="kirk-icon sc-bZQynM ehECGS" width="24"
+                                height="24" aria-hidden="true" fill="#708C91">
+                                <polyline fill="none" stroke="#708C91" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" stroke-miterlimit="10" points="9 18 15 12 9 6"></polyline>
+                            </svg></span></a>
+                    <div class="sc-hMqMXs cpGWPm" aria-hidden="true"></div>
+                </li>
+                <hr>
+                <li class="kirk-items-list-item"><a type="button"
+                        class="kirk-item kirk-item--clickable sc-chPdSV wHelH kirk-item-choice"
+                        href="/search?fn=A%C3%A9roport%20Lyon%20Saint-Exup%C3%A9ry%2C%2069125%20Colombier-Saugnieu%2C%20France&amp;fc=45.712578%2C5.073449&amp;fcc=FR&amp;fp=1&amp;formatted_from=A%C3%A9roport%20Lyon%20Saint-Exup%C3%A9ry%2C%20Colombier-Saugnieu&amp;tn=07100%20Annonay%2C%20France&amp;tc=45.239403%2C4.667349&amp;tcc=FR&amp;tp=1&amp;formatted_to=Annonay&amp;departure_location_id=eyJpIjoiRWpsQnc2bHliM0J2Y25RZ1RIbHZiaUJUWVdsdWRDMUZlSFZ3dzZseWVTd2dRMjlzYjIxaWFXVnlMVk5oZFdkdWFXVjFMQ0JHY21GdVkyVWlMaW9zQ2hRS0VnbW52UVhkS3NfMFJ4SGlDYnI2Vk50RWN4SVVDaElKOHlNNGpFako5RWNSZDUzcEo2MVE3R1EiLCJwIjoxLCJ2IjoxLCJ0IjpbMV19&amp;arrival_location_id=eyJpIjoiQ2hJSmxiaVNLRjhTOVVjUklKWHJ5Njg4Q1FRIiwicCI6MSwidiI6MSwidCI6W119&amp;departure_city=Colombier-Saugnieu&amp;arrival_city=Annonay"><span
+                            class="kirk-item-leftAddon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                                class="kirk-icon sc-bZQynM ehECGS" width="24" height="24" aria-hidden="true"
+                                fill="#708C91">
+                                <g fill="none" fill-rule="evenodd">
+                                    <path d="M0 0h24v24H0z"></path>
+                                    <g stroke="#708C91" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="9.565"></circle>
+                                        <path d="M12 6.783V12h5.217"></path>
+                                    </g>
+                                </g>
+                            </svg></span><span class="kirk-item-leftText"><span
+                                class="kirk-text kirk-text-title sc-bdVaJa dFybSt"
+                                style="color: rgb(5, 71, 82);">Aéroport
+                                Lyon Saint-Exupéry, Colombier-Saugnieu <svg viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg" class="kirk-icon sc-bZQynM ehECGS pt-s"
+                                    width="16" height="16" aria-hidden="true" fill="#054752">
+                                    <g fill="none" stroke="#054752" stroke-width="2" stroke-miterlimit="10"
+                                        stroke-linejoin="round" stroke-linecap="round" transform="rotate(180 12 12)">
+                                        <path d="M22 12H2"></path>
+                                        <path d="M9 19l-7-7 7-7"></path>
+                                    </g>
+                                </svg> Annonay</span></span><span class="kirk-item-rightAddon"><svg viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg" class="kirk-icon sc-bZQynM ehECGS" width="24"
+                                height="24" aria-hidden="true" fill="#708C91">
+                                <polyline fill="none" stroke="#708C91" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" stroke-miterlimit="10" points="9 18 15 12 9 6"></polyline>
+                            </svg></span></a>
+                    <div class="sc-hMqMXs cpGWPm" aria-hidden="true"></div>
+                </li>
+                <hr>
+
+            </ul>
+        </article>
+    </div>
+    <div *ngIf="time">
+        <br>
+        <br>
+        <h2 class="d-flex justify-content-center">À quelle heure ?</h2>
+        <br>
+        <article class="card-body mx-auto d-flex justify-content-center" style="max-width: 600px;">
+            <div class="d-flex flex-column bd-highlight mb-3">
+                <div class="form-group d-flex justify-content-center">
+                    <div class='input-group date' id='datetimepicker3'>
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-clock"></i> </span>
+                        </div>
+                        <input type='text' class="form-control" [ngxTimepicker]="defaultValue"
+                            [(ngModel)]="timeString" />
+
+                    </div>
+                </div>
+                <ngx-material-timepicker #defaultValue></ngx-material-timepicker>
+                <br>
+
+                <button class="btn btn-primary d-flex justify-content-center" routerLink="/login">continue</button>
+            </div>
+
+        </article>
+    </div>
+    <div *ngIf="date">
+        <br>
+        <br>
+        <h2 class="d-flex justify-content-center">Quand vous voulez jouez ?</h2>
+        <br>
+        <article class="card-body mx-auto d-flex justify-content-center" style="max-width: 600px;">
+            <ngb-datepicker #d (dateSelect)="onShowTime($event)"></ngb-datepicker>
+
+        </article>
+    </div>
+
+
+</div>

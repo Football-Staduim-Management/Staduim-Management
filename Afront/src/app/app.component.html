@@ -1,1 +1,57 @@
+<div class="navbar navbar-expand-lg navbar-light  ">
+    
+
+    <div class="navbar-toggler"  data-toggle="collapse" data-target="#navbarSupportedContent" routerLink="/login">
+        <a class="flex items-center mx-s large:ml-none large:mr-xl" title="Se connecter" ><svg
+                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"  width="24"
+                height="24" aria-hidden="true" fill="#00AFF5">
+                <g fill="none" stroke="#00AFF5" stroke-width="1">
+                    <path d="M6.67 20.5A5 5 0 0 1 11 18h2a5 5 0 0 1 4.34 2.52"></path>
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <rect width="7" height="9" x="8.5" y="6.5" rx="3.5"></rect>
+                </g>
+            </svg></a>
+        </div>
+        <div  class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent" routerLink="/recherche">
+            <a class="" title="Rechercher" >
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"  width="24"
+                    height="24" aria-hidden="true" fill="#00AFF5">
+                    <g fill="none" stroke="#00AFF5" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+                        stroke-miterlimit="10">
+                        <line x1="22" y1="22" x2="16.4" y2="16.4"></line>
+                        <circle cx="10" cy="10" r="9"></circle>
+                    </g>
+                </svg>
+            </a>
+    
+        </div>
+        <div  class="navbar-toggler"  data-toggle="collapse" data-target="#navbarSupportedContent" routerLink="/signup">
+            <a class="flex items-center " title="Proposer un trajet" >
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"  width="24"
+                    height="24" aria-hidden="true" fill="#00AFF5">
+                    <g fill="none" stroke="#00AFF5" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+                        stroke-miterlimit="10">
+                        <path d="M12 7v10M17 12H7"></path>
+                        <circle cx="12" cy="12" r="11"></circle>
+                    </g>
+                </svg>
+            </a>
+        </div>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link text-primary" routerLink="/recherche">Recherche</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-primary" routerLink="/login">Connexion</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-primary" routerLink="/signup">Inscription</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
 <router-outlet></router-outlet>
+

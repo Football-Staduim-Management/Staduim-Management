@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
 
 <div class="wrapper">
+  <h3 class="title">Je me connecte :</h3>
   <article class="card-body mx-auto" style="max-width: 400px;">
 
     <form #form="ngForm" (ngSubmit)="login(form.value)">
@@ -24,7 +25,7 @@
       <div class="form-group">
         <button type="submit" class="btn btn-primary btn-block"> Login </button>
       </div>
-      <p class="text-center">Don't Have an account? <a routerLink='/signup'>Signup</a> </p>
+
     </form>
   </article>
   <br>
@@ -33,3 +34,10 @@
     <strong>Error !</strong> {{authErrorMessage}}.
   </div>
 </div>
+
+
+
+<!-- 2. datepicker in the popup -->
+
+
+

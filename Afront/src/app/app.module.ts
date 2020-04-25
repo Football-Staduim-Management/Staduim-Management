@@ -14,15 +14,20 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { LoginInterceptorService } from './services/interceptors/login-interceptor.services';
 import { RouterModule } from '@angular/router';
-
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import {NgbDatepickerModule} from '@ng-bootstrap/ng-bootstrap'
 import {routes} from "./app.router";
-import { SignupComponent } from './component/signup/signup.component'
+import { SignupComponent } from './component/signup/signup.component';
+import { SearchComponent } from './component/search/search.component'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +37,14 @@ import { SignupComponent } from './component/signup/signup.component'
     HttpClientModule,
     StoreModule.forRoot({currentUser: reducer}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    NgxMaterialTimepickerModule,
+    BrowserAnimationsModule,
+    NgbDatepickerModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCJQXd7xxQSc4jM2URmmHV2XGwWBFIcsRg',
+      libraries: ['places'] 
+    })
   ],
   providers: [LoginService, UserService,
   {
