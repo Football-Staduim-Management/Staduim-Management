@@ -10,4 +10,5 @@ export class SearchInfos {
     zoneRaduis: number
     time: String
     date: String
+    location : String
 }

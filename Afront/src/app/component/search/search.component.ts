@@ -2,8 +2,7 @@ import { Component, OnInit, NgZone, ElementRef, ViewChild, AfterViewInit, AfterV
 import { MapsAPILoader, MouseEvent, AgmCircle, AgmMarker, LatLngLiteral } from '@agm/core';
 import { SearchInfos } from 'src/app/Model/SearchInfos';
 import { SearchService } from 'src/app/services/search.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Route } from '@angular/compiler/src/core';
+import {  Router } from '@angular/router';
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -38,17 +37,20 @@ export class SearchComponent implements OnInit, AfterViewInit {
   ]
   address: string;
   @ViewChild("search") searchElementRef: ElementRef;
-  @ViewChild(AgmCircle) circleZone : AgmCircle;
-  @ViewChild(AgmMarker) marker : AgmMarker;
+  @ViewChild(AgmCircle) circleZone: AgmCircle;
+  @ViewChild(AgmMarker) marker: AgmMarker;
   autocomplete: any
-  searchInf : SearchInfos = new SearchInfos();
+  searchInf: SearchInfos = new SearchInfos();
+  hisearch: Array<SearchInfos>
+  locationError : boolean = false
 
   constructor(
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
-    private searchService : SearchService,
-    private route : Router
-    ) {
+    private searchService: SearchService,
+    private route: Router
+  ) {
+    this.hisearch = JSON.parse(localStorage.getItem("hisearch")) === null ? new Array<SearchInfos>() : JSON.parse(localStorage.getItem("hisearch"))
   }
 
 
@@ -62,11 +64,11 @@ export class SearchComponent implements OnInit, AfterViewInit {
   }
 
   onShowDate() {
-    this.circleZone.getCenter().then((res)=>{
+    this.circleZone.getCenter().then((res) => {
       this.searchInf.zoneCenter.lng = res.lng()
       this.searchInf.zoneCenter.alt = res.lat()
     })
-    this.searchInf.zoneRaduis=this.circleZone.radius
+    this.searchInf.zoneRaduis = this.circleZone.radius
     this.time = false
     this.zone = false
     this.date = true
@@ -136,22 +138,30 @@ export class SearchComponent implements OnInit, AfterViewInit {
     });
   }
 
-   search(){
-    this.searchInf.date=this.dateString
-    this.searchInf.time=this.timeString
+  search() {
+    if(this.searchInf.zoneCenter){
+    this.searchInf.date = this.dateString
+    this.searchInf.time = this.timeString
+    this.searchInf.location = this.address
     this.searchService.centre = this.searchInf.zoneCenter
-    this.searchService.address=this.address
+    this.searchService.address = this.address
     this.searchService.date = this.dateString
-    this.searchService.time= this.timeString
-    this.searchService.searchStadiums(this.searchInf).subscribe((res)=>{
+    this.searchService.time = this.timeString
+    this.hisearch.push(this.searchInf)
+    localStorage.setItem("hisearch", JSON.stringify(this.hisearch))
+    this.searchService.searchStadiums(this.searchInf).subscribe((res) => {
       this.searchService.propStadiums = res
       this.route.navigateByUrl("/propositions")
-    },error=>{console.log(error)})
+    }, error => { console.log(error) })
+  }
+  else{
+  this.locationError =true
+  }
   }
 
-  onChangeCenter(event){
+  onChangeCenter(event) {
     console.log(event)
   }
-  
+
 
 }
