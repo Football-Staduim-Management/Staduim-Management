@@ -6,6 +6,8 @@ import { Store, select } from '@ngrx/store';
 import { login } from 'src/app/services/reduxService/actions/login.action';
 import { ArrayType } from '@angular/compiler';
 import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
+import { LocalizedString } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +27,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
     private loginService: LoginService,
     private store: Store<{ currentUser }>,
     private rendere: Renderer2,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
     ) { 
       
         }
@@ -65,6 +68,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
       user.isAdmin = res.isAdmin;
       user.password = res.password;
       this.userService.saveCurrentUser(user, true);
+      this.router.navigateByUrl("/recherche")
+      this.loginService.setItem("isAuth","true")
     }, (error: HttpErrorResponse) => {
       this.authError = true
       this.authErrorMessage = error.status === 401 ? "verifier votre email ou mot de passe" : error.message

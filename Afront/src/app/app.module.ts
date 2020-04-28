@@ -21,13 +21,15 @@ import { SignupComponent } from './component/signup/signup.component';
 import { SearchComponent } from './component/search/search.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AgmCoreModule } from '@agm/core';
+import { PropositionsComponent } from './component/propositions/propositions.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SignupComponent,
-    SearchComponent
+    SearchComponent,
+    PropositionsComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +46,7 @@ import { AgmCoreModule } from '@agm/core';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCJQXd7xxQSc4jM2URmmHV2XGwWBFIcsRg',
       libraries: ['places'] 
-    })
+    }),
   ],
   providers: [LoginService, UserService,
   {

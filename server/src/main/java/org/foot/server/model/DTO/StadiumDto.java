@@ -18,4 +18,5 @@ public class StadiumDto {
     private String name;
     private Position position;
     private User userManager;
+    private Long relativePos;
 }

@@ -1,5 +1,9 @@
 import { Component, OnInit, NgZone, ElementRef, ViewChild, AfterViewInit, AfterViewChecked, OnChanges } from '@angular/core';
 import { MapsAPILoader, MouseEvent, AgmCircle, AgmMarker, LatLngLiteral } from '@agm/core';
+import { SearchInfos } from 'src/app/Model/SearchInfos';
+import { SearchService } from 'src/app/services/search.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Route } from '@angular/compiler/src/core';
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -34,12 +38,17 @@ export class SearchComponent implements OnInit, AfterViewInit {
   ]
   address: string;
   @ViewChild("search") searchElementRef: ElementRef;
-  @ViewChild(AgmCircle) circleZone;
+  @ViewChild(AgmCircle) circleZone : AgmCircle;
   @ViewChild(AgmMarker) marker : AgmMarker;
   autocomplete: any
+  searchInf : SearchInfos = new SearchInfos();
 
-  constructor(private mapsAPILoader: MapsAPILoader,
-    private ngZone: NgZone) {
+  constructor(
+    private mapsAPILoader: MapsAPILoader,
+    private ngZone: NgZone,
+    private searchService : SearchService,
+    private route : Router
+    ) {
   }
 
 
@@ -53,16 +62,23 @@ export class SearchComponent implements OnInit, AfterViewInit {
   }
 
   onShowDate() {
+    this.circleZone.getCenter().then((res)=>{
+      this.searchInf.zoneCenter.lng = res.lng()
+      this.searchInf.zoneCenter.alt = res.lat()
+    })
+    this.searchInf.zoneRaduis=this.circleZone.radius
     this.time = false
     this.zone = false
     this.date = true
   }
+
   onShowTime(event) {
     this.time = true
     this.zone = false
     this.date = false
     this.dateString = event.day + " " + this.months[event.month - 1] + " " + event.year
   }
+
   onShowZone() {
     this.time = false
     this.zone = true
@@ -80,7 +96,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
         this.ngZone.run(() => {
           //get the place result
           let place: google.maps.places.PlaceResult = this.autocomplete.getPlace();
-
+          this.address = place.formatted_address
           //verify result
           if (place.geometry === undefined || place.geometry === null) {
             return;
@@ -94,6 +110,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
       });
     });
   }
+
   markerDragEnd($event: MouseEvent) {
     console.log($event);
     this.latitude = $event.coords.lat;
@@ -118,4 +135,23 @@ export class SearchComponent implements OnInit, AfterViewInit {
 
     });
   }
+
+   search(){
+    this.searchInf.date=this.dateString
+    this.searchInf.time=this.timeString
+    this.searchService.centre = this.searchInf.zoneCenter
+    this.searchService.address=this.address
+    this.searchService.date = this.dateString
+    this.searchService.time= this.timeString
+    this.searchService.searchStadiums(this.searchInf).subscribe((res)=>{
+      this.searchService.propStadiums = res
+      this.route.navigateByUrl("/propositions")
+    },error=>{console.log(error)})
+  }
+
+  onChangeCenter(event){
+    console.log(event)
+  }
+  
+
 }

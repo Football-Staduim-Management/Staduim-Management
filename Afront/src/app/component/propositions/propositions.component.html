@@ -1,0 +1,64 @@
+<br>
+<br>
+<h2 class="d-flex justify-content-center">On vous propose :</h2>
+<br>
+<article class="card-body mx-auto" style="max-width: 600px;">
+
+    <div class="card" routerLink="/recherche">
+        <div class="card-header">
+            <div class="d-flex flex-row  align-items-center">
+                <svg class="p-2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="35" height="35"
+                    aria-hidden="true" fill="#708C91">
+                    <g fill="none" stroke="#708C91" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+                        stroke-miterlimit="10">
+                        <line x1="22" y1="22" x2="16.4" y2="16.4"></line>
+                        <circle cx="10" cy="10" r="9"></circle>
+                    </g>
+                </svg>
+                <div class="p-2">
+                    <p class="card-text "> {{address}} <span class="text-primary"> __{{date}} à {{time}}</span> </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="loaded">
+        <br>
+        <h6 class="text-muted">{{nbr}} terrains disponibles dans la zone choisi</h6>
+        <br>
+        <div *ngFor="let stadium of stadiums">
+            <div class="card  rounded mb-3">
+                <div class="card-body">
+                    <div class="card-title d-flex">
+                        <h5 class=" mr-auto p-2">{{stadium.name}}</h5>
+                        <h6 class=" p-2">23dt</h6>
+                    </div>
+                    <div class="card-text d-flex align-items-center">
+                        <div class="mr-auto p-2">{{stadium.location}},
+                            <div class=" d-flex align-items-center">
+                                <div class="kirk-proximity sc-Rmtcm loFdqH p-2">
+                                    <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
+                                        class="kirk-icon sc-ifAKCX fjVebn" width="20px" height="20px"
+                                        aria-hidden="false" fill="#FFCA0C">
+                                        <title>Un peu loin de l'adresse indiquée</title>
+                                        <path
+                                            d="M10 20C4.477 20 0 15.523 0 10S4.477 0 10 0s10 4.477 10 10-4.477 10-10 10zm1.202-14.863a1.568 1.568 0 1 0 0-3.136 1.568 1.568 0 0 0 0 3.136zm.94 1.868h-.005a1.568 1.568 0 0 0-1.563-1.554h-.007c-2.252 0-3.896 1.32-4.288 2.692L5.5 11.051H6.926l.723-2.72 1.166-.825-.874 3.264L6.003 18h1.569l1.83-5.661 1.526 1.269.314 4.392h1.528v-5.02l-1.757-1.756.473-1.767a3.753 3.753 0 0 0 2.853 1.313h.314V9.515a2.51 2.51 0 0 1-2.51-2.51z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <small class="p-2 text-muted">{{stadium.relativePos}} metres de {{address}}</small>
+                            </div>
+                        </div>
+                        <a href="#" class="btn btn-primary p-2">Reserver</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</article>
+<article class="d-flex justify-content-center" *ngIf="!loaded">
+    <div class="spinner-border  " role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</article>

@@ -24,8 +24,8 @@
             <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
                 <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true"
                     (dragEnd)="markerDragEnd($event)"></agm-marker>
-                <agm-circle [latitude]="latitude" [longitude]="longitude" [(radius)]="circleRadius"
-                    [fillColor]="'blue'" [circleDraggable]="true" [editable]="true" ></agm-circle>
+                <agm-circle [latitude]="latitude" [longitude]="longitude" [(radius)]="circleRadius" [fillColor]="'blue'"
+                    [circleDraggable]="true" [editable]="true" (centerChange)="onChangeCenter($event)"></agm-circle>
             </agm-map>
 
             <hr>
@@ -158,7 +158,7 @@
                 <ngx-material-timepicker #defaultValue></ngx-material-timepicker>
                 <br>
 
-                <button class="btn btn-primary d-flex justify-content-center" routerLink="/login">continue</button>
+                <button class="btn btn-primary d-flex justify-content-center" (click)="search()">continue</button>
             </div>
 
         </article>
@@ -169,7 +169,7 @@
         <h2 class="d-flex justify-content-center">Quand vous voulez jouez ?</h2>
         <br>
         <article class="card-body mx-auto d-flex justify-content-center" style="max-width: 600px;">
-            <ngb-datepicker #d (dateSelect)="onShowTime($event)"></ngb-datepicker>
+            <ngb-datepicker #d (dateSelect)="onShowTime($event)" ></ngb-datepicker>
 
         </article>
     </div>

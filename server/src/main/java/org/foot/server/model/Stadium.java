@@ -17,9 +17,9 @@ public class Stadium {
     private Long id;
     @Column(name = "name")
     private String name;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Position position;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn
     private User userManager;
 }
