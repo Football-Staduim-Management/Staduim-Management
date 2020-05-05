@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 export class UserService {
 
   currentUser : User
-  BaseUrI: string = "http://localhost:8080"
+  BaseUrI: string = "http://10.188.67.156:8080"
 
   constructor(private httpClient : HttpClient,  private store : Store<{currentUser}> ) {
     this.store.select("currentUser").subscribe((state)=>{

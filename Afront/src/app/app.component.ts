@@ -9,16 +9,23 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  authentication=false;
   title = 'Afront';
   isAuth : String;
-  constructor(private logingService: LoginService, private router: Router){
+  constructor(private loginService: LoginService, private router: Router){
+    
     this.isAuth=localStorage.getItem("isAuth")===null? undefined : localStorage.getItem("isAuth") 
-    logingService.watchStorage().subscribe((elem)=>{
+    loginService.watchStorage().subscribe((elem)=>{
       this.isAuth=(elem==="removed") ? undefined : elem
+      this.authentication=false
     })
   }
   logout(){
-    this.logingService.removeItem("isAuth");
-    this.router.navigateByUrl("/login")
+    this.authentication=true
+    this.loginService.logout().subscribe((resp)=>{
+      console.log(resp)
+      this.loginService.removeItem("isAuth");
+      this.router.navigateByUrl("/login")
+    })
   }
 }

@@ -1,129 +1,208 @@
-<div class=" navbar navbar-expand-lg navbar-light ">
+<div class="d-flex">
+    <div class="p-2 flex-fill navbar navbar-expand-lg navbar-light ">
 
 
-    <div class="navbar-toggler mr-auto p-2" data-toggle="collapse" data-target="#navbarSupportedContent"
-        routerLink="/recherche">
-        <a class="" title="Rechercher">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24" aria-hidden="true"
-                fill="#00AFF5">
-                <g fill="none" stroke="#00AFF5" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
-                    stroke-miterlimit="10">
-                    <line x1="22" y1="22" x2="16.4" y2="16.4"></line>
-                    <circle cx="10" cy="10" r="9"></circle>
-                </g>
-            </svg>
-        </a>
-    </div>
-    <div class="navbar-toggler  p-2" data-toggle="collapse" data-target="#navbarSupportedContent" routerLink="/login">
-        <a class="flex items-center mx-s large:ml-none large:mr-xl" title="Se connecter"><svg viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg" width="24" height="24" aria-hidden="true" fill="#00AFF5">
-                <g fill="none" stroke="#00AFF5" stroke-width="1">
-                    <path d="M6.67 20.5A5 5 0 0 1 11 18h2a5 5 0 0 1 4.34 2.52"></path>
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <rect width="7" height="9" x="8.5" y="6.5" rx="3.5"></rect>
-                </g>
-            </svg></a>
-    </div>
-    <div class="navbar-toggler p-2" style="margin-left: 3px;" data-toggle="collapse"
-        data-target="#navbarSupportedContent" >
-        <a class="flex items-center " title="Proposer un trajet" *ngIf="!isAuth" routerLink="/signup">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24" aria-hidden="true"
-                fill="#00AFF5">
-                <g fill="none" stroke="#00AFF5" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
-                    stroke-miterlimit="10">
-                    <path d="M12 7v10M17 12H7"></path>
-                    <circle cx="12" cy="12" r="11"></circle>
-                </g>
-            </svg>
-        </a>
-        <span class="kirk-item-leftAddon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
-                class="kirk-icon sc-ifAKCX fjVebn" width="24" height="24" aria-hidden="true" fill="#00AFF5"
-                *ngIf="isAuth" (click)="logout()">
-                <g>
-                    <path
-                        d="M16.854,8.146c-0.195-0.195-0.512-0.195-0.707,0L12.5,11.793L8.854,8.146c-0.195-0.195-0.512-0.195-0.707,0 s-0.195,0.512,0,0.707l3.646,3.646l-3.646,3.646c-0.195,0.195-0.195,0.512,0,0.707s0.512,0.195,0.707,0l3.646-3.646l3.646,3.646 C16.244,16.951,16.372,17,16.5,17s0.256-0.049,0.354-0.146c0.195-0.195,0.195-0.512,0-0.707L13.207,12.5l3.646-3.646 C17.049,8.658,17.049,8.342,16.854,8.146z">
-                    </path>
-                    <path
-                        d="M12.5,1C6.159,1,1,6.159,1,12.5C1,18.841,6.159,24,12.5,24C18.841,24,24,18.841,24,12.5 C24,6.159,18.841,1,12.5,1z M12.5,23C6.71,23,2,18.29,2,12.5C2,6.71,6.71,2,12.5,2C18.29,2,23,6.71,23,12.5 C23,18.29,18.29,23,12.5,23z">
-                    </path>
-                </g>
-            </svg>
-        </span>
-    </div>
-
-
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto p-2">
-
-
-            <li class="nav-item ">
-                <a class="nav-link text-primary d-flex align-items-center font-weight-bold" routerLink="/recherche">
-                    <svg class="p-2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="40" height="40"
-                        aria-hidden="true" fill="#00AFF5">
-                        <g fill="none" stroke="#00AFF5" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
-                            stroke-miterlimit="10">
-                            <line x1="22" y1="22" x2="16.4" y2="16.4"></line>
-                            <circle cx="10" cy="10" r="9"></circle>
-                        </g>
-                    </svg>
-
-                    <span class=" p-2" style="color: #00AFF5;">Recherche</span>
-                </a>
-            </li>
-
-
-
-            <li class="nav-item">
-                <a class="nav-link text-primary font-weight-bold d-flex align-items-center">
-                    <svg class="p-2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="40" height="40"
-                        aria-hidden="true" fill="#00AFF5">
-                        <g fill="none" stroke="#00AFF5" stroke-width="1">
-                            <path d="M6.67 20.5A5 5 0 0 1 11 18h2a5 5 0 0 1 4.34 2.52"></path>
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <rect width="7" height="9" x="8.5" y="6.5" rx="3.5"></rect>
-                        </g>
-                    </svg>
-                    <span class="p-2" style="color: #00AFF5;" *ngIf="!isAuth" routerLink="/login">Conexion</span>
-                    <span class="p-2" style="color: #00AFF5;" *ngIf="isAuth">Profile</span>
-                </a>
-            </li>
-
-
-
-
-            <li class="nav-item " *ngIf="!isAuth">
-                <a class="nav-link text-primary font-weight-bold d-flex align-items-center" routerLink="/signup">
-                    <svg class="p-2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="40" height="40"
-                        aria-hidden="true" fill="#00AFF5">
-                        <g fill="none" stroke="#00AFF5" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
-                            stroke-miterlimit="10">
-                            <path d="M12 7v10M17 12H7"></path>
-                            <circle cx="12" cy="12" r="11"></circle>
-                        </g>
-                    </svg>
-                    <span class="p-2" style="color: #00AFF5;">Inscription</span>
-                </a>
-            </li>
-
-
-
-        </ul>
-        <a class="p-2 d-flex align-items-center" style="color: #00AFF5;" (click)="logout()" *ngIf="isAuth">
-            <span class="kirk-item-leftAddon p-2"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
-                    class="kirk-icon sc-ifAKCX fjVebn" width="24" height="24" aria-hidden="true" fill="#00AFF5">
-                    <g>
-                        <path
-                            d="M16.854,8.146c-0.195-0.195-0.512-0.195-0.707,0L12.5,11.793L8.854,8.146c-0.195-0.195-0.512-0.195-0.707,0 s-0.195,0.512,0,0.707l3.646,3.646l-3.646,3.646c-0.195,0.195-0.195,0.512,0,0.707s0.512,0.195,0.707,0l3.646-3.646l3.646,3.646 C16.244,16.951,16.372,17,16.5,17s0.256-0.049,0.354-0.146c0.195-0.195,0.195-0.512,0-0.707L13.207,12.5l3.646-3.646 C17.049,8.658,17.049,8.342,16.854,8.146z">
-                        </path>
-                        <path
-                            d="M12.5,1C6.159,1,1,6.159,1,12.5C1,18.841,6.159,24,12.5,24C18.841,24,24,18.841,24,12.5 C24,6.159,18.841,1,12.5,1z M12.5,23C6.71,23,2,18.29,2,12.5C2,6.71,6.71,2,12.5,2C18.29,2,23,6.71,23,12.5 C23,18.29,18.29,23,12.5,23z">
-                        </path>
+        <div class="navbar-toggler mr-auto p-2" data-toggle="collapse" data-target="#navbarSupportedContent"
+            routerLink="/recherche" *ngIf="isAuth">
+            <a class="" title="Rechercher">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24" aria-hidden="true"
+                    fill="#00AFF5">
+                    <g fill="none" stroke="#00AFF5" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+                        stroke-miterlimit="10">
+                        <line x1="22" y1="22" x2="16.4" y2="16.4"></line>
+                        <circle cx="10" cy="10" r="9"></circle>
                     </g>
                 </svg>
-            </span>
-            Deconnexion
+            </a>
+        </div>
+        <div class="navbar-toggler  p-2" data-toggle="collapse" data-target="#navbarSupportedContent"
+            routerLink="/login" *ngIf="!isAuth">
+            <a class="flex items-center mx-s large:ml-none large:mr-xl" title="Se connecter">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24" aria-hidden="true"
+                    fill="#00AFF5">
+                    <g fill="none" stroke="#00AFF5" stroke-width="1">
+                        <path d="M6.67 20.5A5 5 0 0 1 11 18h2a5 5 0 0 1 4.34 2.52"></path>
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <rect width="7" height="9" x="8.5" y="6.5" rx="3.5"></rect>
+                    </g>
+                </svg>
+            </a>
+        </div>
+        <div class="navbar-toggler p-2" style="margin-left: 3px;" data-toggle="collapse"
+            data-target="#navbarSupportedContent" *ngIf="!isAuth">
+            <a class="flex items-center " title="Proposer un trajet"  routerLink="/signup">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24" aria-hidden="true"
+                    fill="#00AFF5">
+                    <g fill="none" stroke="#00AFF5" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+                        stroke-miterlimit="10">
+                        <path d="M12 7v10M17 12H7"></path>
+                        <circle cx="12" cy="12" r="11"></circle>
+                    </g>
+                </svg>
+            </a>
+            
+        </div>
+
+
+
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto p-2">
+
+                <li class="nav-item " *ngIf="isAuth">
+                    <a class="nav-link text-primary d-flex align-items-center font-weight-bold" routerLink="/recherche">
+                        <svg class="p-2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="40" height="40"
+                            aria-hidden="true" fill="#00AFF5">
+                            <g fill="none" stroke="#00AFF5" stroke-width="1" stroke-linecap="round"
+                                stroke-linejoin="round" stroke-miterlimit="10">
+                                <line x1="22" y1="22" x2="16.4" y2="16.4"></line>
+                                <circle cx="10" cy="10" r="9"></circle>
+                            </g>
+                        </svg>
+
+                        <span class=" p-2" style="color: #00AFF5;">Recherche</span>
+                    </a>
+                </li>
+
+
+
+                <li class="nav-item" *ngIf="!isAuth">
+                    <a class="nav-link text-primary font-weight-bold d-flex align-items-center">
+                        <svg class="p-2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="40" height="40"
+                            aria-hidden="true" fill="#00AFF5">
+                            <g fill="none" stroke="#00AFF5" stroke-width="1">
+                                <path d="M6.67 20.5A5 5 0 0 1 11 18h2a5 5 0 0 1 4.34 2.52"></path>
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <rect width="7" height="9" x="8.5" y="6.5" rx="3.5"></rect>
+                            </g>
+                        </svg>
+                        <span class="p-2" style="color: #00AFF5;"  routerLink="/login">Conexion</span>
+                        
+                    </a>
+                </li>
+
+
+
+
+                <li class="nav-item " *ngIf="!isAuth">
+                    <a class="nav-link text-primary font-weight-bold d-flex align-items-center" routerLink="/signup">
+                        <svg class="p-2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="40" height="40"
+                            aria-hidden="true" fill="#00AFF5">
+                            <g fill="none" stroke="#00AFF5" stroke-width="1" stroke-linecap="round"
+                                stroke-linejoin="round" stroke-miterlimit="10">
+                                <path d="M12 7v10M17 12H7"></path>
+                                <circle cx="12" cy="12" r="11"></circle>
+                            </g>
+                        </svg>
+                        <span class="p-2" style="color: #00AFF5;">Inscription</span>
+                    </a>
+                </li>
+
+
+            </ul>
+
+        </div>
+
+
+
+    </div>
+
+    <div class="p-2 flex-fill d-flex flex-row-reverse" *ngIf="isAuth">
+        <a class="p-2 btn  dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            <span>Iskander</span>
+            <svg aria-hidden="true" class="Header-navigationChevron" style="width: 24px; height: 24px;">
+                <use xlink:href="#icon-chevron-down-pixar"></use>
+            </svg>
+            <img src="https://d2kwny77wxvuie.cloudfront.net/user/Srl7qrIJTw61riuQov2jXQ/thumbnail_72x72.jpeg" width="54"
+                height="54" alt="" class="rounded-circle">
+
         </a>
+
+        <div class=" p-2 Dropdown Dropdown--userMenu dropdown-menu js-dropdownUserMenu Dropdown--active ">
+
+            <li class="d-flex align-items-center dropdown-item">
+                <div class="mr-auto p-2 d-flex">
+                    <a class="p-2 items-center mx-s large:ml-none large:mr-xl" title="Se connecter">
+                        <svg aria-hidden="true" class="u-gray-fill" style="width: 24px; height: 24px;" id="icon-home"
+                            viewBox="0 0 24 24">
+                            <g fill="none" stroke="#708C91" stroke-width="1">
+                                <path
+                                    d="M19.5,13c-0.276,0-0.5,0.224-0.5,0.5V23h-4v-4.5c0-0.276-0.224-0.5-0.5-0.5h-4c-0.276,0-0.5,0.224-0.5,0.5
+                                V23H6v-9.5C6,13.224,5.776,13,5.5,13S5,13.224,5,13.5v10C5,23.776,5.224,24,5.5,24h5c0.276,0,0.5-0.224,0.5-0.5V19h3v4.5
+                                c0,0.276,0.224,0.5,0.5,0.5h5c0.276,0,0.5-0.224,0.5-0.5v-10C20,13.224,19.776,13,19.5,13z">
+                                </path>
+                                <path d="M23.836,12.13L12.5,1.824L1.164,12.13c-0.204,0.186-0.219,0.502-0.034,0.706
+                                c0.187,0.206,0.503,0.22,0.707,0.034L12.5,3.176l10.664,9.694C23.26,12.957,23.38,13,23.5,13c0.136,0,0.271-0.055,0.37-0.164
+                                C24.056,12.632,24.041,12.316,23.836,12.13z"></path>
+                            </g>
+                        </svg>
+                    </a>
+                    <span class="p-2 NavigationMenu-content"><em>Tableau de
+                            bord</em></span>
+                </div>
+                <div class="p-2">
+                    <svg width="24" height="24" aria-hidden="true" fill="#708C91" id="icon-chevron-right-pixar"
+                        viewBox="0 0 24 24">
+                        <polyline fill="none" stroke="#708C91" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" stroke-miterlimit="10" points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </div>
+            </li>
+
+            <li class="d-flex align-items-center dropdown-item">
+                <div class="mr-auto p-2 d-flex">
+                    <a class="p-2 items-center mx-s large:ml-none large:mr-xl" title="Se connecter">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            aria-hidden="true" fill="#708C91">
+                            <g fill="none" stroke="#708C91" stroke-width="1">
+                                <path d="M6.67 20.5A5 5 0 0 1 11 18h2a5 5 0 0 1 4.34 2.52"></path>
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <rect width="7" height="9" x="8.5" y="6.5" rx="3.5"></rect>
+                            </g>
+                        </svg>
+                    </a>
+                    <span class="p-2"> <em>Profil</em></span>
+                </div>
+                <div class="p-2">
+                    <svg width="24" height="24" aria-hidden="true" fill="#708C91" id="icon-chevron-right-pixar"
+                        viewBox="0 0 24 24" *ngIf="!authentication">
+                        <polyline fill="none" stroke="#708C91" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" stroke-miterlimit="10" points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                    <div class="spinner-border text-success" role="status" *ngIf="authentication">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            </li>
+
+
+            <li class="d-flex align-items-center dropdown-item" (click)="logout()">
+                <div class="mr-auto p-2 d-flex">
+                    <a class="p-2 items-center mx-s large:ml-none large:mr-xl" title="Se connecter">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="kirk-icon sc-ifAKCX fjVebn"
+                            width="24" height="24" aria-hidden="true" fill="#708C91" *ngIf="isAuth" (click)="logout()">
+                            <g>
+                                <path
+                                    d="M16.854,8.146c-0.195-0.195-0.512-0.195-0.707,0L12.5,11.793L8.854,8.146c-0.195-0.195-0.512-0.195-0.707,0 s-0.195,0.512,0,0.707l3.646,3.646l-3.646,3.646c-0.195,0.195-0.195,0.512,0,0.707s0.512,0.195,0.707,0l3.646-3.646l3.646,3.646 C16.244,16.951,16.372,17,16.5,17s0.256-0.049,0.354-0.146c0.195-0.195,0.195-0.512,0-0.707L13.207,12.5l3.646-3.646 C17.049,8.658,17.049,8.342,16.854,8.146z">
+                                </path>
+                                <path
+                                    d="M12.5,1C6.159,1,1,6.159,1,12.5C1,18.841,6.159,24,12.5,24C18.841,24,24,18.841,24,12.5 C24,6.159,18.841,1,12.5,1z M12.5,23C6.71,23,2,18.29,2,12.5C2,6.71,6.71,2,12.5,2C18.29,2,23,6.71,23,12.5 C23,18.29,18.29,23,12.5,23z">
+                                </path>
+                            </g>
+                        </svg>
+                    </a>
+                    <span class=" mr-auto p-2 NavigationMenu-content"><em>Se déconnecter</em></span>
+                </div>
+                <div class="p-2">
+                    <svg width="24" height="24" aria-hidden="true" fill="#708C91" id="icon-chevron-right-pixar"
+                        viewBox="0 0 24 24">
+                        <polyline fill="none" stroke="#708C91" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" stroke-miterlimit="10" points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </div>
+            </li>
+        </div>
     </div>
 </div>
 

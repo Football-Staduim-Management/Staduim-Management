@@ -9,7 +9,7 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 })
 export class LoginService {
 
-  BaseUrI: string = "http://localhost:8080"
+  BaseUrI: string = "http://10.188.67.156:8080"
   
 
   constructor(private httpClient : HttpClient) {
@@ -42,6 +42,10 @@ export class LoginService {
                                   observe : 'response',
                                   withCredentials: true
                                 });
+  }
+
+  logout() : Observable<any>{
+    return this.httpClient.post(this.BaseUrI+"/logoutUser",null);
   }
   
 }

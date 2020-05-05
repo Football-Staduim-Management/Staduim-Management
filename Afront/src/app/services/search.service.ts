@@ -14,7 +14,7 @@ export class SearchService {
   date : String
   time : String
   address : String
-  BaseUrI: string = "http://localhost:8080"
+  BaseUrI: string = "http://10.188.67.156:8080"
   constructor(private httpClient: HttpClient) { }
 
   searchStadiums(searchInfo) : Observable<any>{

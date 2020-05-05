@@ -16,6 +16,7 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Collection;
@@ -47,6 +48,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         SecurityContextHolder.getContext().setAuthentication(authentication);
         response.setStatus(200);
         response.setHeader("sessionID", RequestContextHolder.currentRequestAttributes().getSessionId());
+
         PrintWriter writer = response.getWriter();
         writer.println("HTTP Status 200 - Authanticated ");
     }
