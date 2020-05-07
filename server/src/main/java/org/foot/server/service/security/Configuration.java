@@ -1,8 +1,7 @@
 package org.foot.server.service.security;
 
-import org.foot.server.service.security.Filter.AdapterFilter;
 import org.foot.server.service.security.Filter.CustomUserDetailService;
-import org.foot.server.service.security.Filter.JwtAuthenticationFilter;
+import org.foot.server.service.security.Filter.AuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
@@ -15,7 +14,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
-import org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -64,7 +62,7 @@ public class Configuration extends WebSecurityConfigurerAdapter {
                 .authenticationEntryPoint(unauthorizedHandler)
 
                 .and()
-                .addFilter(new JwtAuthenticationFilter(authenticationManager()));
+                .addFilter(new AuthenticationFilter(authenticationManager()));
 
 
         http

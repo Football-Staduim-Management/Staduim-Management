@@ -4,7 +4,6 @@ import org.foot.server.DAL.UserRepository;
 import org.foot.server.model.DTO.UserDto;
 import org.foot.server.model.User;
 import org.foot.server.model.mapper.UserMapper;
-import org.foot.server.service.security.Filter.AdapterFilter;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;

@@ -1,9 +1,9 @@
-<br>
-<br>
-<h2 class="d-flex justify-content-center">On vous propose :</h2>
-<br>
-<article class="card-body mx-auto" style="max-width: 600px;">
 
+
+<article class=" card-body mx-auto" style="max-width: 700px;">
+    
+    <h2 class="d-flex justify-content-center">On vous propose :</h2>
+    <br>
     <div class="card" routerLink="/recherche">
         <div class="card-header">
             <div class="d-flex flex-row  align-items-center">
@@ -16,17 +16,21 @@
                     </g>
                 </svg>
                 <div class="p-2">
-                    <p class="card-text "> {{address}} <span class="text-primary"> __{{date}} à {{time}}</span> </p>
+                    <p class="card-text ">Zone de {{address}} <span class="text-primary"> __{{date}} à {{time}}</span> </p>
                 </div>
             </div>
         </div>
     </div>
+    <hr>
     <div *ngIf="loaded">
-        <br>
+        
         <h6 class="text-muted">{{nbr}} terrains disponibles dans la zone choisi</h6>
         <br>
+    </div>
+    
+    <div *ngIf="loaded">
         <div *ngFor="let stadium of stadiums">
-            <div class="card  rounded mb-3">
+            <div class="card  rounded-lg mb-3" id="formContent">
                 <div class="card-body">
                     <div class="card-title d-flex">
                         <h5 class=" mr-auto p-2">{{stadium.name}}</h5>
@@ -48,10 +52,13 @@
                                 <small class="p-2 text-muted">{{stadium.relativePos}} metres de {{address}}</small>
                             </div>
                         </div>
-                        <a href="#" class="btn btn-primary p-2">Reserver</a>
+                        <a href="#" class="btn btn-primary p-2 rounded-pill" disabled>Reserver</a>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="d-flex justify-content-center">
+            <button type="button" class="btn  btn-outline-primary rounded-pill" >Créer une alert</button>
         </div>
     </div>
 </article>

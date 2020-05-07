@@ -6,11 +6,11 @@
 
 <div class="wrapper">
     <div *ngIf="zone">
-        <br>
+        
         <br>
         <h2 class="d-flex justify-content-center">Où voulez-vous Jouer ?</h2>
         <br>
-        <article class="card-body mx-auto" style="max-width: 600px;">
+        <article class="card-body mx-auto" style="max-width: 700px;">
 
             <div class="input-group input-group-lg">
                 <div class="input-group-prepend">
@@ -31,25 +31,34 @@
             <br>
             <h6 class="text-muted">Choisir l'heure</h6>
             <a class="d-flex list-group-item-action no-hover nav-link " id="date" (click)="onShowDate()">
-                <span class=" mr-auto p-2 text-primary font-weight-bold">{{dateString}} à {{timeString}}</span>
-                <span class="kirk-item-leftAddon  p-2">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="kirk-icon sc-bZQynM ehECGS"
-                        width="24" height="24" aria-hidden="true" fill="#708C91">
-                        <g fill="none" fill-rule="evenodd">
-                            <path d="M0 0h24v24H0z"></path>
-                            <g stroke="#708C91" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="12" cy="12" r="9.565"></circle>
-                                <path d="M12 6.783V12h5.217"></path>
+                <div class="mr-auto p-2">
+                    <span class="  p-2">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            aria-hidden="true" fill="#708C91">
+                            <g fill="none" fill-rule="evenodd">
+                                <path d="M0 0h24v24H0z"></path>
+                                <g stroke="#708C91" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="9.565"></circle>
+                                    <path d="M12 6.783V12h5.217"></path>
+                                </g>
                             </g>
-                        </g>
+                        </svg>
+                    </span>
+                    <span class="  p-2 text-primary text-decoration-none">{{dateString}} à {{timeString}}</span>
+                </div>
+                <div class="p-2">
+                    <svg width="24" height="24" aria-hidden="true" fill="#708C91" id="icon-chevron-right-pixar"
+                        viewBox="0 0 24 24">
+                        <polyline fill="none" stroke="#708C91" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" stroke-miterlimit="10" points="9 18 15 12 9 6"></polyline>
                     </svg>
-                </span>
+                </div>
             </a>
 
             <hr>
             <h6 class="text-muted">Historique de recherche</h6>
-            
-            <ul >
+
+            <ul>
                 <br>
                 <li class="list-group-item-action" *ngFor="let his of hisearch">
                     <a type="button" class="d-flex align-items-center">
@@ -57,8 +66,7 @@
                             <span class="p-2" style="color: rgb(5, 71, 82);">
                                 {{his.location}}
                             </span>
-                            <span class="p-2"
-                                style="color: rgb(112, 140, 145);">
+                            <span class="p-2" style="color: rgb(112, 140, 145);">
                                 {{his.date}} à {{his.time}}
                             </span>
                         </span>

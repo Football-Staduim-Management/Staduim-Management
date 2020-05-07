@@ -9,4 +9,44 @@
 
 a{
     font-size: 1em;
-}  
+} 
+
+.dropdown-item {
+    
+    padding: 0rem 0.5rem;
+    
+}
+
+
+#profileImage{
+    padding: .5rem!important;
+
+}
+
+.p-2 {
+    border: 0cm;
+    padding: .3rem!important;
+}
+
+.navbar-toggler {
+    
+    
+    border: 0px solid transparent;
+    
+}
+
+.navbar {
+    
+    
+     padding: 0rem 0rem; 
+}
+
+.footer {
+    margin-top: 24px;
+    padding-top: 24px;
+    background-color: #EDEDED;
+}
+
+
+
+

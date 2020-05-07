@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 export class LoginInterceptorService implements HttpInterceptor{
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const headers = new HttpHeaders({ "sessionID" :  localStorage.getItem("sessionID")});
+        
         const cloneReq = req.clone({
             withCredentials: true,
             //headers

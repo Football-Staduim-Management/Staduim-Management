@@ -16,19 +16,16 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Collection;
 
 
-public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private final AuthenticationManager authenticationManager;
 
-    @Autowired
-    SessionRegistry sessionRegistry;
 
-    public JwtAuthenticationFilter(AuthenticationManager authenticationManager) {
+    public AuthenticationFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
         setFilterProcessesUrl("/api/authenticate");
     }
@@ -47,7 +44,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             FilterChain filterChain, Authentication authentication) throws IOException, ServletException {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         response.setStatus(200);
-        response.setHeader("sessionID", RequestContextHolder.currentRequestAttributes().getSessionId());
 
         PrintWriter writer = response.getWriter();
         writer.println("HTTP Status 200 - Authanticated ");

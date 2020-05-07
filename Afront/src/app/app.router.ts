@@ -9,6 +9,6 @@ import { PropositionsComponent } from './component/propositions/propositions.com
         {path:"signup", component : SignupComponent},
         {path:"recherche", component : SearchComponent},
         {path:"propositions", component : PropositionsComponent},
-        {path:"", redirectTo : "/login", pathMatch: 'full'},
+        {path:"", redirectTo : "/recherche", pathMatch: 'full'},
     ]
 

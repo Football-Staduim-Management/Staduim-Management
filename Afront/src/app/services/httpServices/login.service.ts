@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Observable, Subject } from 'rxjs';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { BaseUrI } from '../share';
 
 
 @Injectable({
@@ -9,33 +10,11 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 })
 export class LoginService {
 
-  BaseUrI: string = "http://10.188.67.156:8080"
-  
-
-  constructor(private httpClient : HttpClient) {
-    
-   }
-
-   private storageSub= new Subject<String>();
-  
-
-  watchStorage(): Observable<any> {
-    return this.storageSub.asObservable();
-  }
-
-  setItem(key: string, data: any) {
-    localStorage.setItem(key, data);
-    this.storageSub.next('setted');
-  }
-
-  removeItem(key) {
-    localStorage.removeItem(key);
-    this.storageSub.next('removed');
-  }
+  constructor(private httpClient : HttpClient) {}
 
   authentication(data): Observable<any>{
     let p = new HttpParams().set("email",data.email).set("password",data.password);
-    return this.httpClient.get(this.BaseUrI+"/api/authenticate", 
+    return this.httpClient.get(BaseUrI+"/api/authenticate", 
                                 {
                                   params : p, 
                                   responseType: 'text', 
@@ -45,7 +24,7 @@ export class LoginService {
   }
 
   logout() : Observable<any>{
-    return this.httpClient.post(this.BaseUrI+"/logoutUser",null);
+    return this.httpClient.post(BaseUrI+"/logoutUser",null);
   }
   
 }

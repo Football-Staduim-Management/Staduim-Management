@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { LoginService } from './services/login.service';
-import { element } from 'protractor';
+import { LoginService } from './services/httpServices/login.service';
 import { Router } from '@angular/router';
+import { UserStateService } from './services/storageServices/user-state.service';
 
 @Component({
   selector: 'app-root',
@@ -9,23 +9,26 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  authentication=false;
   title = 'Afront';
-  isAuth : String;
-  constructor(private loginService: LoginService, private router: Router){
-    
-    this.isAuth=localStorage.getItem("isAuth")===null? undefined : localStorage.getItem("isAuth") 
-    loginService.watchStorage().subscribe((elem)=>{
-      this.isAuth=(elem==="removed") ? undefined : elem
-      this.authentication=false
+  isAuth : Boolean=false;
+  
+  constructor(private userState : UserStateService,
+     private router: Router,
+     private loginService : LoginService
+     ){
+    this.isAuth=userState.currentUser.isAuth
+    userState.isAuth().subscribe((resp)=>{
+      this.isAuth = resp
     })
   }
+
   logout(){
-    this.authentication=true
     this.loginService.logout().subscribe((resp)=>{
       console.log(resp)
-      this.loginService.removeItem("isAuth");
+      this.isAuth=false
+      this.userState.deleteCurrentUser("currentUser");
       this.router.navigateByUrl("/login")
     })
   }
+
 }

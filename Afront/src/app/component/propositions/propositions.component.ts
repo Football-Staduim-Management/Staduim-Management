@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewChild, NgZone } from '@angular/core';
-import { SearchService } from 'src/app/services/search.service';
+import { SearchService } from 'src/app/services/httpServices/search.service';
 import { AgmMap, MapsAPILoader } from '@agm/core'
 import { stadium } from 'src/app/Model/Stadium';
-import { element } from 'protractor';
 @Component({
   selector: 'app-propositions',
   templateUrl: './propositions.component.html',

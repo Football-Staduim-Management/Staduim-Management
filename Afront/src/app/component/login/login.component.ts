@@ -1,13 +1,10 @@
 import { Component, OnInit, ViewChild, ElementRef, Renderer2, OnChanges, AfterViewInit } from '@angular/core';
-import { LoginService } from 'src/app/services/login.service';
+import { LoginService } from 'src/app/services/httpServices/login.service';
 import { User } from 'src/app/Model/user';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { Store, select } from '@ngrx/store';
-import { login } from 'src/app/services/reduxService/actions/login.action';
-import { ArrayType } from '@angular/compiler';
-import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
-import { LocalizedString } from '@angular/compiler/src/output/output_ast';
+import { UserService } from 'src/app/services/httpServices/user.service';
+import { UserStateService } from 'src/app/services/storageServices/user-state.service';
 
 @Component({
   selector: 'app-login',
@@ -21,56 +18,55 @@ export class LoginComponent implements OnInit, AfterViewInit {
   authErrorMessage: string
   @ViewChild("email") email: ElementRef
   @ViewChild("password") password: ElementRef
-  
-  
+
+
   constructor(
     private loginService: LoginService,
-    private store: Store<{ currentUser }>,
     private rendere: Renderer2,
     private userService: UserService,
-    private router: Router
-    ) { 
-      
-        }
+    private router: Router,
+    private userState: UserStateService
+  ) {
+
+  }
   ngAfterViewInit(): void {
-      this.rendere.setAttribute(this.email.nativeElement,"placeholder",
-      this.userService.currentUser.email===""?  "email":this.userService.currentUser.email)
-      
-      this.rendere.setValue( this.email.nativeElement,this.userService.currentUser.email===""?  "email":this.userService.currentUser.email)
+    this.rendere.setAttribute(this.email.nativeElement, "placeholder",
+      this.userState.currentUser.email === "" ? "email" : this.userState.currentUser.email)
+
+    this.rendere.setValue(this.email.nativeElement,
+      this.userState.currentUser.email === "" ? "email" : this.userState.currentUser.email)
   }
 
 
   ngOnInit(): void {
-    
+
   }
 
 
   login(data) {
-    let email = data.email
-    let password = data.password
-    this.store.dispatch(login({ email, password }));
+    let user = new User()
+    user.email = data.email
+    user.password = data.password
     this.loginService.authentication(data).subscribe((res: HttpResponse<any>) => {
       this.authError = false
-      let s = res.headers.get("sessionID")
-      localStorage.setItem("sessionID",s)
-      this.loadUser()
+      this.loadUser(this.userState.currentUser.email)
     }, (error: HttpErrorResponse) => {
       this.authError = true
       this.authErrorMessage = error.status === 401 ? "verifier votre email ou mot de passe" : error.message
     })
   }
 
-  loadUser() {
-    this.userService.loadCurrentUser().subscribe((res: any) => {
+  loadUser(email: string) {
+    this.userService.loadUser(email).subscribe((res: any) => {
       let user: User = new User();
       user.email = res.email;
       user.id = res.id;
       user.name = res.name
       user.isAdmin = res.isAdmin;
       user.password = res.password;
-      this.userService.saveCurrentUser(user, true);
+      user.isAuth = true
+      this.userState.setCurrentUser( user);
       this.router.navigateByUrl("/recherche")
-      this.loginService.setItem("isAuth","true")
     }, (error: HttpErrorResponse) => {
       this.authError = true
       this.authErrorMessage = error.status === 401 ? "verifier votre email ou mot de passe" : error.message

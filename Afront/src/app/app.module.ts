@@ -6,10 +6,9 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './component/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { UserService } from './services/user.service';
-import { LoginService } from './services/login.service';
+import { LoginService } from './services/httpServices/login.service';
 import { StoreModule } from '@ngrx/store';
-import { reducer } from './services/reduxService/actions/reducers/login.reducers';
+import { reducer } from './services/reduxService/reducers/login.reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { LoginInterceptorService } from './services/interceptors/login-interceptor.services';
@@ -23,6 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AgmCoreModule } from '@agm/core';
 import { PropositionsComponent } from './component/propositions/propositions.component';
 import { MdpValidatorDirective } from './Directives/mdp-validator.directive'
+import { UserService } from './services/httpServices/user.service';
 
 @NgModule({
   declarations: [

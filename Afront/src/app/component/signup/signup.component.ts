@@ -1,8 +1,9 @@
 import { Component, OnInit, Renderer2, ViewChild, ElementRef } from '@angular/core';
-import { SignupService } from 'src/app/services/signup.service';
+import { SignupService } from 'src/app/services/httpServices/signup.service';
 import {  Router } from '@angular/router';
-import { UserService } from 'src/app/services/user.service';
 import { FormControl } from '@angular/forms';
+import { UserService } from 'src/app/services/httpServices/user.service';
+import { UserStateService } from 'src/app/services/storageServices/user-state.service';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -18,7 +19,8 @@ export class SignupComponent implements OnInit {
   constructor(private signupService: SignupService, 
               private router : Router, 
               private userService : UserService,
-              private renderer : Renderer2
+              private renderer : Renderer2,
+              private userState : UserStateService
               ) { }
  
   ngOnInit(): void {
@@ -33,7 +35,7 @@ export class SignupComponent implements OnInit {
     
     this.signupService.signup(data).subscribe((res)=> {
       this.showError=false
-      this.userService.saveCurrentUser(res,false)
+      this.userState.setCurrentUser(res)
       this.router.navigateByUrl("/login")
     },
     (error)=>{

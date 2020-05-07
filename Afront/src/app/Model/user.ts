@@ -8,4 +8,6 @@ export class  User{
     password:string;
 
     isAdmin:boolean;
+
+    isAuth : boolean = false
 }

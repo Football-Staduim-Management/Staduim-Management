@@ -3,7 +3,6 @@ package org.foot.server.service;
 import org.foot.server.DAL.PositionRepository;
 import org.foot.server.DAL.StadiumRepository;
 import org.foot.server.model.DTO.StadiumDto;
-import org.foot.server.model.DTO.UserDto;
 import org.foot.server.model.Position;
 import org.foot.server.model.SearchInfo;
 import org.foot.server.model.Stadium;

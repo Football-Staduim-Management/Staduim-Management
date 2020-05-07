@@ -1,8 +1,8 @@
-import { Component, OnInit, NgZone, ElementRef, ViewChild, AfterViewInit, AfterViewChecked, OnChanges } from '@angular/core';
-import { MapsAPILoader, MouseEvent, AgmCircle, AgmMarker, LatLngLiteral } from '@agm/core';
+import { Component, OnInit, NgZone, ElementRef, ViewChild, AfterViewInit, Renderer2 } from '@angular/core';
+import { MapsAPILoader, MouseEvent, AgmCircle, AgmMarker } from '@agm/core';
 import { SearchInfos } from 'src/app/Model/SearchInfos';
-import { SearchService } from 'src/app/services/search.service';
-import {  Router } from '@angular/router';
+import { SearchService } from 'src/app/services/httpServices/search.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -42,13 +42,14 @@ export class SearchComponent implements OnInit, AfterViewInit {
   autocomplete: any
   searchInf: SearchInfos = new SearchInfos();
   hisearch: Array<SearchInfos>
-  locationError : boolean = false
+  locationError: boolean = false
 
   constructor(
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
     private searchService: SearchService,
-    private route: Router
+    private route: Router,
+    private renderer : Renderer2
   ) {
     this.hisearch = JSON.parse(localStorage.getItem("hisearch")) === null ? new Array<SearchInfos>() : JSON.parse(localStorage.getItem("hisearch"))
   }
@@ -64,14 +65,19 @@ export class SearchComponent implements OnInit, AfterViewInit {
   }
 
   onShowDate() {
-    this.circleZone.getCenter().then((res) => {
-      this.searchInf.zoneCenter.lng = res.lng()
-      this.searchInf.zoneCenter.alt = res.lat()
-    })
-    this.searchInf.zoneRaduis = this.circleZone.radius
-    this.time = false
-    this.zone = false
-    this.date = true
+    if (this.address) {
+      this.circleZone.getCenter().then((res) => {
+        this.searchInf.zoneCenter.lng = res.lng()
+        this.searchInf.zoneCenter.alt = res.lat()
+      })
+      this.searchInf.zoneRaduis = this.circleZone.radius
+      this.time = false
+      this.zone = false
+      this.date = true
+    }else{
+      this.renderer.setAttribute(this.searchElementRef.nativeElement,"class","form-control is-invalid")
+
+    }
   }
 
   onShowTime(event) {
@@ -139,24 +145,28 @@ export class SearchComponent implements OnInit, AfterViewInit {
   }
 
   search() {
-    if(this.searchInf.zoneCenter){
-    this.searchInf.date = this.dateString
-    this.searchInf.time = this.timeString
-    this.searchInf.location = this.address
-    this.searchService.centre = this.searchInf.zoneCenter
-    this.searchService.address = this.address
-    this.searchService.date = this.dateString
-    this.searchService.time = this.timeString
-    this.hisearch.push(this.searchInf)
-    localStorage.setItem("hisearch", JSON.stringify(this.hisearch))
-    this.searchService.searchStadiums(this.searchInf).subscribe((res) => {
-      this.searchService.propStadiums = res
-      this.route.navigateByUrl("/propositions")
-    }, error => { console.log(error) })
-  }
-  else{
-  this.locationError =true
-  }
+    if (this.searchInf.zoneCenter) {
+      this.searchInf.date = this.dateString
+      this.searchInf.time = this.timeString
+      this.searchInf.location = this.address
+      this.searchService.centre = this.searchInf.zoneCenter
+      this.searchService.address = this.address
+      this.searchService.date = this.dateString
+      this.searchService.time = this.timeString
+      this.hisearch.push(this.searchInf)
+      localStorage.setItem("hisearch", JSON.stringify(this.hisearch))
+      this.searchService.searchStadiums(this.searchInf).subscribe((res) => {
+        this.searchService.propStadiums = res
+        this.route.navigateByUrl("/propositions")
+      }, error => { 
+        if(error.status===401) {
+          this.route.navigateByUrl("/login")
+        }
+      })
+    }
+    else {
+      this.locationError = true
+    }
   }
 
   onChangeCenter(event) {
