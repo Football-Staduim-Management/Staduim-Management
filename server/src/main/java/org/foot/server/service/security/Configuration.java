@@ -35,7 +35,6 @@ public class Configuration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//.addFilterBefore(new AdapterFilter(), WebAsyncManagerIntegrationFilter.class)
         http
                 .cors()
                 .and()
@@ -60,14 +59,12 @@ public class Configuration extends WebSecurityConfigurerAdapter {
                 .and()
                 .httpBasic()
                 .authenticationEntryPoint(unauthorizedHandler)
-
                 .and()
                 .addFilter(new AuthenticationFilter(authenticationManager()));
 
 
         http
                 .sessionManagement()
-
                 .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
     }
 

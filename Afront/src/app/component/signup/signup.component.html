@@ -8,10 +8,11 @@
 
 
 
-<div class="wrapper fadeInDown">
-    <h3 class="title">Je crée mon compte :</h3>
-    <article class="card-body mx-auto" style="max-width: 400px;">
+<div class="app-body fadeInDown">
 
+    <article class="card-body mx-auto" style="max-width: 400px;">
+        <h3 class="title">Je crée mon compte :</h3>
+        <br>
         <form #signUpform="ngForm" (ngSubmit)="signup(signUpform.value)">
 
             <div class="form-group input-group">
@@ -50,16 +51,22 @@
                 <input Class="form-control" placeholder="Repeat password" type="password" name="password" ngModel
                     #repassword>
             </div>
+            <div class="alert alert-danger alert-dismissable" *ngIf="showError">
 
-            <div class="form-group" *ngIf="!password.invalid && password.touched ">
-                <button type="submit" class="btn btn-primary btn-block"> Create Account </button>
+                <strong>Error !</strong> {{error}}.
+            </div>
+            <div class="row align-items-stretch">
+                <div class="col-6">
+                    <button type="submit" class="btn btn-block btn-primary"
+                        [disabled]="password.invalid && !password.touched ">Créer</button>
+                </div>
+                <div class="col-6">
+                    <p> Déjà membre ? <a routerLink="/login"> Connecter</a> </p>
+                </div>
             </div>
 
         </form>
     </article>
-    <div class="alert alert-danger alert-dismissable" *ngIf="showError">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-        <strong>Error !</strong> {{error}}.
-    </div>
+
 
 </div>

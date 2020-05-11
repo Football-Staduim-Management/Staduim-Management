@@ -6,20 +6,30 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
 public class Stadium {
+
     @Id
     @GeneratedValue
     private Long id;
+
     @Column(name = "name")
     private String name;
+
     @OneToOne(cascade = CascadeType.ALL)
     private Position position;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn
     private User userManager;
+
+    @OneToMany(mappedBy = "stadium")
+    Set<Match> matchs;
+
 }

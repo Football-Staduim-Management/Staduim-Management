@@ -4,7 +4,7 @@
 <!------ Include the above in your HEAD tag ---------->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
 
-<div class="wrapper">
+<div class="wrapper navbar-toggler" data-toggle="collapse" data-target="#navbarTogglerDemo03">
   <h3 class="title">Je me connecte :</h3>
   <article class="card-body mx-auto" style="max-width: 400px;">
 
@@ -13,7 +13,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text"> <i class="fa fa-user"></i> </span>
         </div>
-        <input id="login" name="email" ngModel  class="form-control" placeholder="email" type="text" #email>
+        <input id="login" name="email" ngModel class="form-control" placeholder="email" type="text" #email>
       </div>
       <div class="form-group input-group">
         <div class="input-group-prepend">
@@ -22,22 +22,20 @@
         <input class="form-control" id="password" name="password" ngModel placeholder="password" type="password"
           #password>
       </div>
+      <div class="alert alert-danger alert-dismissable" *ngIf="authError">
+        
+        <strong>Error !</strong> {{authErrorMessage}}.
+      </div>
       <div class="form-group">
         <button type="submit" class="btn btn-primary btn-block"> Login </button>
+      </div>
+      <div class="justify-content-center">
+        <p> Pas encore membre ? <a routerLink="/signup"> Inscrivez-vous</a> </p>
       </div>
 
     </form>
   </article>
   <br>
-  <div class="alert alert-danger alert-dismissable" *ngIf="authError">
-    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-    <strong>Error !</strong> {{authErrorMessage}}.
-  </div>
+
 </div>
-
-
-
-<!-- 2. datepicker in the popup -->
-
-
-
+<br>

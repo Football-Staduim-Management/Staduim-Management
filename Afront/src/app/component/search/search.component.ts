@@ -3,6 +3,9 @@ import { MapsAPILoader, MouseEvent, AgmCircle, AgmMarker } from '@agm/core';
 import { SearchInfos } from 'src/app/Model/SearchInfos';
 import { SearchService } from 'src/app/services/httpServices/search.service';
 import { Router } from '@angular/router';
+import { UserStateService } from 'src/app/services/storageServices/user-state.service';
+import { LoginComponent } from '../login/login.component';
+import { LoginService } from 'src/app/services/httpServices/login.service';
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -43,13 +46,14 @@ export class SearchComponent implements OnInit, AfterViewInit {
   searchInf: SearchInfos = new SearchInfos();
   hisearch: Array<SearchInfos>
   locationError: boolean = false
-
   constructor(
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
     private searchService: SearchService,
     private route: Router,
-    private renderer : Renderer2
+    private renderer : Renderer2,
+    private userState : UserStateService,
+    private loginService : LoginService   
   ) {
     this.hisearch = JSON.parse(localStorage.getItem("hisearch")) === null ? new Array<SearchInfos>() : JSON.parse(localStorage.getItem("hisearch"))
   }
@@ -160,7 +164,11 @@ export class SearchComponent implements OnInit, AfterViewInit {
         this.route.navigateByUrl("/propositions")
       }, error => { 
         if(error.status===401) {
-          this.route.navigateByUrl("/login")
+          if(this.userState.isAuth){
+            this.loginService.authentication(this.userState.currentUser).subscribe(()=>{
+              this.search()
+            })
+          }
         }
       })
     }

@@ -1,8 +1,10 @@
 package org.foot.server.service;
 
+import org.foot.server.DAL.MatchsRepository;
 import org.foot.server.DAL.PositionRepository;
 import org.foot.server.DAL.StadiumRepository;
 import org.foot.server.model.DTO.StadiumDto;
+import org.foot.server.model.Match;
 import org.foot.server.model.Position;
 import org.foot.server.model.SearchInfo;
 import org.foot.server.model.Stadium;
@@ -11,7 +13,14 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
+import java.time.LocalTime;
+import java.time.temporal.Temporal;
+import java.time.temporal.TemporalAmount;
+import java.time.temporal.TemporalUnit;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,6 +30,9 @@ public class StadiumManagementService {
     StadiumRepository stadiumRepository;
     @Autowired
     PositionRepository positionRepository;
+    @Autowired
+    MatchsRepository matchsRepository;
+
     StadiumMapper stadiumMapper = Mappers.getMapper(StadiumMapper.class);
 
     List<Long> relativePoss = new ArrayList<Long>();
@@ -66,9 +78,10 @@ public class StadiumManagementService {
         for(int i=0;i<stadiums.size();i++){
             stadiumsDto.get(i).setRelativePos(this.relativePoss.get(i));
         }
+
         return stadiumsDto;
     }
-    public double haversineDistance(float lat1,float lon1, float lat2, float lon2){
+    private double haversineDistance(float lat1,float lon1, float lat2, float lon2){
 
         int R = 6371; // Radius of the earth in km
         double dLat = deg2rad(lat2-lat1);  // deg2rad below
@@ -84,7 +97,33 @@ public class StadiumManagementService {
 
         return d*1000;
     }
-    public double deg2rad(double deg){
+    private double deg2rad(double deg){
         return  deg * (Math.PI/180);
+    }
+    private boolean disponibility(String date, String time, Stadium stadium, int duration){
+        LocalTime localTime1 = LocalTime.parse(time);
+
+        LocalTime midNight = LocalTime.parse("23:59");
+        //if(Duration.between(localTime1,midNight).getSeconds())
+
+        List<Match> matches = matchsRepository.findByDateAndStadium(date,stadium.getId());
+        if(matches == null ){
+            return true;
+        }else{
+            Collections.sort(matches);
+
+            for(int i=0;i<matches.size();i++){
+                LocalTime localTime2 = LocalTime.parse(matches.get(i).getTime());
+                if(localTime1.compareTo(localTime2)>0){
+                    LocalTime localTime3 = LocalTime.parse(matches.get(i+1).getTime());
+                    Duration d = Duration.between(localTime1,localTime3);
+                    if(d.getSeconds()>=duration){
+                        return true;
+                    }
+
+                }
+            }
+        }
+        return true;
     }
 }

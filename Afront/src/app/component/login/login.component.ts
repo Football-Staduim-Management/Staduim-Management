@@ -47,8 +47,12 @@ export class LoginComponent implements OnInit, AfterViewInit {
     let user = new User()
     user.email = data.email
     user.password = data.password
+    this.userState.currentUser.password=user.password
+    this.userState.currentUser.email=user.email
     this.loginService.authentication(data).subscribe((res: HttpResponse<any>) => {
       this.authError = false
+      
+
       this.loadUser(this.userState.currentUser.email)
     }, (error: HttpErrorResponse) => {
       this.authError = true
@@ -63,7 +67,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
       user.id = res.id;
       user.name = res.name
       user.isAdmin = res.isAdmin;
-      user.password = res.password;
+      user.password = this.userState.currentUser.password
       user.isAuth = true
       this.userState.setCurrentUser( user);
       this.router.navigateByUrl("/recherche")

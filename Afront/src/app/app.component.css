@@ -13,24 +13,21 @@ a{
 
 .dropdown-item {
     
-    padding: 0rem 0.5rem;
+    padding: 0rem 0rem;
     
 }
 
 
 #profileImage{
+    
     padding: .5rem!important;
 
 }
 
-.p-2 {
-    border: 0cm;
-    padding: .3rem!important;
-}
+
 
 .navbar-toggler {
-    
-    
+
     border: 0px solid transparent;
     
 }
@@ -46,6 +43,7 @@ a{
     padding-top: 24px;
     background-color: #EDEDED;
 }
+
 
 
 

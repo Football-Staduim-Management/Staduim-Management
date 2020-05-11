@@ -1,7 +1,8 @@
-<div class="d-flex bd-highlight ">
-    <div class="p-2 flex-grow-1 bd-highlight ">
+<div class="d-flex bd-highlight justify-content-between">
+    
+    <div class="p-2 bd-highlight ">
         <nav class="d-flex navbar navbar-expand-lg navbar-light ">
-
+            
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
                 aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation" *ngIf="isAuth">
                 <span class="navbar-toggler-icon"></span>
@@ -26,6 +27,7 @@
                                         </a>
                                         <span class=" p-2" style="color: #708C91;"><em>Recherche</em></span>
                                     </div>
+                                    
 
                                 </div>
                             </li>
@@ -44,6 +46,7 @@
                                     </a>
                                     <span class="p-2" style="color: #708C91;"> <em>Profil</em></span>
                                 </div>
+                                
 
                             </li>
 
@@ -59,6 +62,7 @@
                                     </a>
                                     <span class="p-2" style="color: #708C91;"> <em>Boite de réception</em></span>
                                 </div>
+                               
 
 
                             </li>
@@ -84,6 +88,7 @@
                                     <span class=" mr-auto p-2 NavigationMenu-content" style="color: #708C91;"><em>Se
                                             déconnecter</em></span>
                                 </div>
+                                
 
                             </li>
                         </ul>
@@ -147,20 +152,7 @@
                             <li class="d-flex align-items-center dropdown-item list-group-item-action"
                                 (click)="logout()">
                                 <div class="mr-auto p-2 d-flex">
-                                    <a class="p-2 items-center mx-s large:ml-none large:mr-xl" title="Se connecter">
-                                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
-                                            class="kirk-icon sc-ifAKCX fjVebn" width="24" height="24" aria-hidden="true"
-                                            fill="#00AFF5" (click)="logout()">
-                                            <g>
-                                                <path
-                                                    d="M16.854,8.146c-0.195-0.195-0.512-0.195-0.707,0L12.5,11.793L8.854,8.146c-0.195-0.195-0.512-0.195-0.707,0 s-0.195,0.512,0,0.707l3.646,3.646l-3.646,3.646c-0.195,0.195-0.195,0.512,0,0.707s0.512,0.195,0.707,0l3.646-3.646l3.646,3.646 C16.244,16.951,16.372,17,16.5,17s0.256-0.049,0.354-0.146c0.195-0.195,0.195-0.512,0-0.707L13.207,12.5l3.646-3.646 C17.049,8.658,17.049,8.342,16.854,8.146z">
-                                                </path>
-                                                <path
-                                                    d="M12.5,1C6.159,1,1,6.159,1,12.5C1,18.841,6.159,24,12.5,24C18.841,24,24,18.841,24,12.5 C24,6.159,18.841,1,12.5,1z M12.5,23C6.71,23,2,18.29,2,12.5C2,6.71,6.71,2,12.5,2C18.29,2,23,6.71,23,12.5 C23,18.29,18.29,23,12.5,23z">
-                                                </path>
-                                            </g>
-                                        </svg>
-                                    </a>
+                                    
                                     <span class=" mr-auto p-2 NavigationMenu-content font-weight-bold"
                                         style="color: #00AFF5 ;"><em>Se
                                             déconnecter</em></span>
@@ -172,18 +164,14 @@
                 </div>
 
             </div>
-
+            
         </nav>
+        
     </div>
-    <div class="p-2  align-items-center">
-        <div class="navbar-toggler" data-toggle="collapse" data-target="#navbarTogglerDemo03">
-            <div class=" d-flex  bd-highlight align-items-center " *ngIf="isAuth">
-                <!--<img class="rounded-circle p-2" width="40" height="40" 
-                    src="https://d2kwny77wxvuie.cloudfront.net/user/Srl7qrIJTw61riuQov2jXQ/thumbnail_144x144.jpeg"
-                    alt="">-->
-            </div>
-        </div>
-    </div>
+    
+    
+    
+    
 </div>
 
 
@@ -191,20 +179,3 @@
 
 
 <router-outlet></router-outlet>
-
-<!--
-    <footer class="page-footer font-small bg-light">
-
-     Copyright 
-    
-    <div class="text-center py-3 d-flex flex-column">
-        <span class="p-2">sommes-nous ?</span> 
-        <span class="p-2">Comment ça marche</span> 
-        <span class="p-2">Contact</span>
-      </div>
-    <div class="footer-copyright text-center py-3">© eFooT, 2020
-      </div>
-      
-    
-  
-  </footer>-->

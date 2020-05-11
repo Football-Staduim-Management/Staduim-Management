@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, NgZone } from '@angular/core';
+import { Component, OnInit, ViewChild, NgZone, OnDestroy } from '@angular/core';
 import { SearchService } from 'src/app/services/httpServices/search.service';
 import { AgmMap, MapsAPILoader } from '@agm/core'
 import { stadium } from 'src/app/Model/Stadium';
@@ -7,7 +7,7 @@ import { stadium } from 'src/app/Model/Stadium';
   templateUrl: './propositions.component.html',
   styleUrls: ['./propositions.component.css']
 })
-export class PropositionsComponent implements OnInit {
+export class PropositionsComponent implements OnInit, OnDestroy {
 
   latitude: number;
   longitude: number;
@@ -32,6 +32,9 @@ export class PropositionsComponent implements OnInit {
     this.time = searchService.time
     this.nbr = this.stadiums.length
     this.findLocations(this.stadiums);
+  }
+  ngOnDestroy(): void {
+    this.searchService.propStadiums=undefined
   }
 
   ngOnInit(): void {
