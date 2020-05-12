@@ -7,10 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.Period;
+import java.time.*;
 
 @Getter
 @Setter
@@ -40,7 +37,11 @@ public class Match implements Comparable<Match> {
     public int compareTo(Match match) {
         LocalTime localTime1 =   LocalTime.parse(this.time);
         LocalTime localTime2 =   LocalTime.parse(match.getTime());
+        LocalDate localDate1 = LocalDate.parse(this.date);
+        LocalDate localDate2 = LocalDate.parse(match.getDate());
+        LocalDateTime localDateTime1 = LocalDateTime.of(localDate1,localTime1);
+        LocalDateTime localDateTime2 = LocalDateTime.of(localDate2,localTime2);
 
-        return localTime1.compareTo(localTime2);
+        return localDateTime1.compareTo(localDateTime2);
     }
 }

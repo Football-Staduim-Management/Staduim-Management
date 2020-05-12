@@ -14,7 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.Temporal;
 import java.time.temporal.TemporalAmount;
 import java.time.temporal.TemporalUnit;
@@ -61,11 +64,11 @@ public class StadiumManagementService {
                 })
                 .collect(Collectors.toList());
     }
-    public List<?> search(SearchInfo searchInfo){
 
+    public List<?> search(SearchInfo searchInfo){
         List<Position> positions = (List)this.positionRepository.findAll();
         List<Position> flitredPositions = positions.stream().filter(element->{
-            double d = haversineDistance(element.getAlt(),element.getLng(), searchInfo.getZoneCenter().getAlt()
+            double d = haversineDistance(element.getAlt(), element.getLng(), searchInfo.getZoneCenter().getAlt()
                     , searchInfo.getZoneCenter().getLng());
 
             if(d< searchInfo.getZoneRaduis()){
@@ -74,56 +77,69 @@ public class StadiumManagementService {
             return false;
         }).collect(Collectors.toList());
         List<Stadium> stadiums = this.stadiumRepository.findByPositionIn(flitredPositions );
+        stadiums=stadiums.stream().filter(element->this.disponibility(searchInfo.getDate(), searchInfo.getTime(),element,5400)).collect(Collectors.toList());
         List<StadiumDto> stadiumsDto = stadiums.stream().map(stadium -> stadiumMapper.StadiumtoStadiumDto(stadium)).collect(Collectors.toList());
         for(int i=0;i<stadiums.size();i++){
             stadiumsDto.get(i).setRelativePos(this.relativePoss.get(i));
         }
-
         return stadiumsDto;
     }
+
     private double haversineDistance(float lat1,float lon1, float lat2, float lon2){
 
-        int R = 6371; // Radius of the earth in km
-        double dLat = deg2rad(lat2-lat1);  // deg2rad below
+        int R = 6371;
+        double dLat = deg2rad(lat2-lat1);
         double dLon = deg2rad(lon2-lon1);
-        double a =
-                Math.sin(dLat/2) * Math.sin(dLat/2) +
+        double a = Math.sin(dLat/2) * Math.sin(dLat/2) +
                         Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
-                                Math.sin(dLon/2) * Math.sin(dLon/2)
-                ;
+                                Math.sin(dLon/2) * Math.sin(dLon/2);
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-        double d = R * c; // Distance in km
+        double d = R * c;
         this.relativePoss.add((long)(d*1000));
 
         return d*1000;
     }
+
     private double deg2rad(double deg){
         return  deg * (Math.PI/180);
     }
+
     private boolean disponibility(String date, String time, Stadium stadium, int duration){
-        LocalTime localTime1 = LocalTime.parse(time);
 
-        LocalTime midNight = LocalTime.parse("23:59");
-        //if(Duration.between(localTime1,midNight).getSeconds())
+        LocalDateTime reqDateTime = this.getLocalDateTime(date,time);
 
-        List<Match> matches = matchsRepository.findByDateAndStadium(date,stadium.getId());
+        List<Match> matches = matchsRepository.findByStadium_id(stadium.getId());
         if(matches == null ){
             return true;
         }else{
             Collections.sort(matches);
-
             for(int i=0;i<matches.size();i++){
-                LocalTime localTime2 = LocalTime.parse(matches.get(i).getTime());
-                if(localTime1.compareTo(localTime2)>0){
-                    LocalTime localTime3 = LocalTime.parse(matches.get(i+1).getTime());
-                    Duration d = Duration.between(localTime1,localTime3);
-                    if(d.getSeconds()>=duration){
+                if(this.getLocalDateTime(matches.get(i).getDate(),matches.get(i).getTime()).compareTo(reqDateTime)>0){
+                    Duration d = Duration.between(this.getLocalDateTime(matches.get(i).getDate(),matches.get(i).getTime())
+                            ,this.getLocalDateTime(matches.get(i+1).getDate(),matches.get(i+1).getTime()));
+                    if(d.getSeconds()>=2*duration){
                         return true;
+                    }else {
+                        return false;
                     }
-
                 }
             }
         }
         return true;
     }
+
+    private LocalDateTime getLocalDateTime(String date, String time){
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("d-M-yyyy");
+        LocalDate localDate = LocalDate.parse(date,df);
+        String[] t = time.split(" ");
+
+        LocalTime localTime = LocalTime.parse(t[0]);
+
+        if(t.length>1 && t[1].equals("PM")){
+            localTime = localTime.plusHours(12);
+        }
+
+        return LocalDateTime.of(localDate,localTime);
+    }
+
 }

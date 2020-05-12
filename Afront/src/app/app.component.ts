@@ -25,10 +25,18 @@ export class AppComponent {
   logout(){
     this.loginService.logout().subscribe((resp)=>{
       console.log(resp)
+      
+      this.userState.deleteCurrentUser("currentUser");
+      this.router.navigateByUrl("/login")
+    },(error)=>{
       this.isAuth=false
       this.userState.deleteCurrentUser("currentUser");
       this.router.navigateByUrl("/login")
+      
     })
   }
 
+  goToRecherche(){
+    this.router.navigateByUrl("/recherche")
+  }
 }

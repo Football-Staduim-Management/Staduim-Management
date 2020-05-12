@@ -7,9 +7,9 @@ import { AuthGuard } from './services/gaurds/auth.guard';
 import { SearchGuard } from './services/gaurds/search.guard';
 
     export const routes : Routes = [
-        {path:"login", component : LoginComponent},
+        {path:"login", component : LoginComponent, canActivate : [AuthGuard]},
         {path:"signup", component : SignupComponent},
-        {path:"recherche", component : SearchComponent, canActivate : [AuthGuard] },
+        {path:"recherche", component : SearchComponent},
         {path:"propositions", component : PropositionsComponent, canActivate : [SearchGuard]},
         {path:"", redirectTo : "/recherche", pathMatch: 'full'},
     ]

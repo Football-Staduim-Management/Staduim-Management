@@ -9,5 +9,5 @@ import java.util.List;
 
 @Component
 public interface MatchsRepository extends CrudRepository<Match, Long> {
-    List<Match> findByDateAndStadium(String date,Long stadium_id);
+    List<Match> findByStadium_id(Long stadium_id);
 }

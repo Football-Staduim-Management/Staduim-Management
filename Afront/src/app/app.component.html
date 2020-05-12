@@ -1,10 +1,10 @@
 <div class="d-flex bd-highlight justify-content-between">
     
     <div class="p-2 bd-highlight ">
-        <nav class="d-flex navbar navbar-expand-lg navbar-light ">
+        <nav class="d-flex navbar fixed-top navbar-expand-lg navbar-light " style="background-color: white;">
             
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
-                aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation" *ngIf="isAuth">
+                aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation" *ngIf="isAuth" #btn>
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -12,7 +12,7 @@
                 <div data-toggle="collapse" data-target="#navbarSupportedContent" *ngIf="isAuth">
                     <div class="navbar-toggler" type="button" data-toggle="collapse">
                         <ul class="  navbar-nav mr-auto mt-2 mt-lg-0">
-                            <li class="dropdown-item list-group-item-action" routerLink="/recherche" type="button">
+                            <li class="dropdown-item list-group-item-action" (click)="goToRecherche()" type="button">
                                 <div class="d-flex align-items-center ">
                                     <div class="mr-auto p-2 d-flex">
                                         <a class=" p-2 nav-link ">
@@ -94,10 +94,10 @@
                         </ul>
                     </div>
                     <div class="collapse navbar-collapse p-2" id="navbarTogglerDemo">
-                        <ul class="  navbar-nav" type="button">
-                            <li class="dropdown-item list-group-item-action ">
+                        
+                            <li class="dropdown-item list-group-item-action " (click)="goToRecherche()">
                                 <div class="d-flex align-items-center ">
-                                    <div class="mr-auto p-2 d-flex" routerLink="/recherche">
+                                    <div class="mr-auto p-2 d-flex" >
                                         <a class=" p-2 nav-link ">
                                             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24"
                                                 height="24" aria-hidden="true" fill="#00AFF5">
@@ -159,7 +159,7 @@
                                 </div>
 
                             </li>
-                        </ul>
+                        
                     </div>
                 </div>
 
@@ -169,13 +169,10 @@
         
     </div>
     
-    
-    
-    
 </div>
 
 
-
-
+<br>
+<br>
 
 <router-outlet></router-outlet>

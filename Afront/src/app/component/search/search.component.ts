@@ -24,20 +24,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
   searchZone: boolean = false
   dateString: String = "Aujourd'hui"
   timeString: String = "23:59"
-  months: String[] = [
-    "Janv.",
-    "Fev.",
-    "Mar.",
-    "Avr.",
-    "Mai.",
-    "Jun.",
-    "Juil.",
-    "Aout.",
-    "Sept.",
-    "Oct.",
-    "Nov.",
-    "Dec.",
-  ]
+  
   address: string;
   @ViewChild("search") searchElementRef: ElementRef;
   @ViewChild(AgmCircle) circleZone: AgmCircle;
@@ -51,9 +38,9 @@ export class SearchComponent implements OnInit, AfterViewInit {
     private ngZone: NgZone,
     private searchService: SearchService,
     private route: Router,
-    private renderer : Renderer2,
-    private userState : UserStateService,
-    private loginService : LoginService   
+    private renderer: Renderer2,
+    private userState: UserStateService,
+    private loginService: LoginService
   ) {
     this.hisearch = JSON.parse(localStorage.getItem("hisearch")) === null ? new Array<SearchInfos>() : JSON.parse(localStorage.getItem("hisearch"))
   }
@@ -78,8 +65,8 @@ export class SearchComponent implements OnInit, AfterViewInit {
       this.time = false
       this.zone = false
       this.date = true
-    }else{
-      this.renderer.setAttribute(this.searchElementRef.nativeElement,"class","form-control is-invalid")
+    } else {
+      this.renderer.setAttribute(this.searchElementRef.nativeElement, "class", "form-control is-invalid")
 
     }
   }
@@ -88,7 +75,8 @@ export class SearchComponent implements OnInit, AfterViewInit {
     this.time = true
     this.zone = false
     this.date = false
-    this.dateString = event.day + " " + this.months[event.month - 1] + " " + event.year
+    this.dateString= event.day+"-"+event.month+"-"+event.year
+    //this.dateString = event.day + " " + this.months[event.month - 1] + " " + event.year
   }
 
   onShowZone() {
@@ -149,33 +137,31 @@ export class SearchComponent implements OnInit, AfterViewInit {
   }
 
   search() {
-    if (this.searchInf.zoneCenter) {
-      this.searchInf.date = this.dateString
-      this.searchInf.time = this.timeString
-      this.searchInf.location = this.address
-      this.searchService.centre = this.searchInf.zoneCenter
-      this.searchService.address = this.address
-      this.searchService.date = this.dateString
-      this.searchService.time = this.timeString
-      this.hisearch.push(this.searchInf)
-      localStorage.setItem("hisearch", JSON.stringify(this.hisearch))
-      this.searchService.searchStadiums(this.searchInf).subscribe((res) => {
-        this.searchService.propStadiums = res
-        this.route.navigateByUrl("/propositions")
-      }, error => { 
-        if(error.status===401) {
-          if(this.userState.isAuth){
-            this.loginService.authentication(this.userState.currentUser).subscribe(()=>{
-              this.search()
-            })
-          }
+
+    this.searchInf.date = this.dateString
+    this.searchInf.time = this.timeString
+    this.searchInf.location = this.address
+    this.searchService.centre = this.searchInf.zoneCenter
+    this.searchService.address = this.address
+    this.searchService.date = this.dateString
+    this.searchService.time = this.timeString
+    /*this.hisearch.push(this.searchInf)
+    localStorage.setItem("hisearch", JSON.stringify(this.hisearch))*/
+    this.searchService.searchStadiums(this.searchInf).subscribe((res) => {
+      this.searchService.propStadiums = res
+      this.route.navigateByUrl("/propositions")
+    }, error => {
+      if (error.status === 401) {
+        if (this.userState.isAuth) {
+          this.loginService.authentication(this.userState.currentUser).subscribe(() => {
+            this.search()
+          })
         }
-      })
-    }
-    else {
-      this.locationError = true
-    }
+      }
+    })
   }
+
+
 
   onChangeCenter(event) {
     console.log(event)
