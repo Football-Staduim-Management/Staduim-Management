@@ -109,7 +109,7 @@ public class StadiumManagementService {
         LocalDateTime reqDateTime = this.getLocalDateTime(date,time);
 
         List<Match> matches = matchsRepository.findByStadium_id(stadium.getId());
-        if(matches == null ){
+        if(matches.size() ==0 ){
             return true;
         }else{
             Collections.sort(matches);
@@ -141,5 +141,7 @@ public class StadiumManagementService {
 
         return LocalDateTime.of(localDate,localTime);
     }
+
+
 
 }

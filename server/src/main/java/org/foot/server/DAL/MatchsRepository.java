@@ -10,4 +10,5 @@ import java.util.List;
 @Component
 public interface MatchsRepository extends CrudRepository<Match, Long> {
     List<Match> findByStadium_id(Long stadium_id);
+    Match findByDateAndTime(String date, String time);
 }
