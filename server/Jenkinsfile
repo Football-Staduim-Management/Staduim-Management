@@ -1,0 +1,16 @@
+pipline{
+    agent any
+    stages{
+        Stage('build'){
+            steps{
+                sh 'mvn clean package'
+            }
+            post{
+                success{
+                    ech 'Now Archiving...'
+                    archiveArtifacts artifacts: '**/target/*.war'
+                }
+            }
+        }
+    }
+}
