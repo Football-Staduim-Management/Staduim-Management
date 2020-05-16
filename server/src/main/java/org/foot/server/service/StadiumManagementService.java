@@ -9,6 +9,7 @@ import org.foot.server.model.Position;
 import org.foot.server.model.SearchInfo;
 import org.foot.server.model.Stadium;
 import org.foot.server.model.mapper.StadiumMapper;
+import org.foot.server.model.mapper.StadiumMapperImpl;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,7 +37,7 @@ public class StadiumManagementService {
     @Autowired
     MatchsRepository matchsRepository;
 
-    StadiumMapper stadiumMapper = Mappers.getMapper(StadiumMapper.class);
+    StadiumMapper stadiumMapper = new StadiumMapperImpl();
 
     List<Long> relativePoss = new ArrayList<Long>();
 

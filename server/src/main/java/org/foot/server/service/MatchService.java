@@ -18,12 +18,12 @@ public class MatchService {
     MatchMapper matchMapper = Mappers.getMapper(MatchMapper.class);
 
     public void reserve(MatchDto match) throws Exception{
-        matchMapper.
-        if (this.matchsRepository.findByDateAndTime(match.getDate(),match.getTime())!=null){
+
+        /*if (this.matchsRepository.findByDateAndTime(match.getDate(),match.getTime())!=null){
             throw new Exception("Time already reseverd");
 
         }else {
             this.matchsRepository.save(match);
-        }
+        }*/
     }
 }
