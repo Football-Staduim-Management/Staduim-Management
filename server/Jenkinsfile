@@ -1,9 +1,12 @@
-pipline{
+pipeline{
     agent any
+    tools{
+        maven 'localMaven'
+    }
     stages{
-        Stage('build'){
+        stage('build'){
             steps{
-                sh 'mvn clean package'
+                sh 'mvn -f server/pom.xml clean package'
             }
             post{
                 success{
