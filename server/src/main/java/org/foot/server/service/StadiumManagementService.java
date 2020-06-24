@@ -10,26 +10,28 @@ import org.foot.server.model.SearchInfo;
 import org.foot.server.model.Stadium;
 import org.foot.server.model.mapper.StadiumMapper;
 import org.foot.server.model.mapper.StadiumMapperImpl;
-import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.Temporal;
-import java.time.temporal.TemporalAmount;
-import java.time.temporal.TemporalUnit;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-
+/**
+ * This file is the service that provide the CRUD of the stadiums
+ * in the data base.
+ *
+ * Also it provides the "search" function that search the availble stadiums in
+ * a specified zone on the map.  For that, it use the "haversine Distance" function.
+ *
+ * */
 @Service
 public class StadiumManagementService {
+
     @Autowired
     StadiumRepository stadiumRepository;
     @Autowired
@@ -48,6 +50,7 @@ public class StadiumManagementService {
         }
         return stadiumMapper.StadiumtoStadiumDto(stadiumRepository.save(stadiumMapper.StadiumDtotoStadium(stadiumDto)));
     }
+
     public void deleteStadium(StadiumDto stadiumDto){
         stadiumRepository.delete(stadiumMapper.StadiumDtotoStadium(stadiumDto));
     }
@@ -142,7 +145,6 @@ public class StadiumManagementService {
 
         return LocalDateTime.of(localDate,localTime);
     }
-
 
 
 }

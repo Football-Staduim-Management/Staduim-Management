@@ -2,12 +2,17 @@ import { Component, OnInit, ViewChild, NgZone, OnDestroy } from '@angular/core';
 import { SearchService } from 'src/app/services/httpServices/search.service';
 import { AgmMap, MapsAPILoader } from '@agm/core'
 import { stadium } from 'src/app/Model/Stadium';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Match } from 'src/app/Model/Match';
+import { reserveMatch } from 'src/app/services/reduxService/actions/match.action';
+import { matchReducer } from 'src/app/services/reduxService/reducers/match.reducers';
 @Component({
   selector: 'app-propositions',
   templateUrl: './propositions.component.html',
   styleUrls: ['./propositions.component.css']
 })
-export class PropositionsComponent implements OnInit, OnDestroy {
+export class PropositionsComponent implements OnInit {
 
   latitude: number;
   longitude: number;
@@ -23,7 +28,10 @@ export class PropositionsComponent implements OnInit, OnDestroy {
   constructor(
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
-    private searchService: SearchService) {
+    private searchService: SearchService,
+    private router : Router,
+    private store : Store< Match>
+    ) {
     this.latitude = searchService.centre.alt;
     this.longitude = searchService.centre.lng;
     this.stadiums = searchService.propStadiums
@@ -33,9 +41,7 @@ export class PropositionsComponent implements OnInit, OnDestroy {
     this.nbr = this.stadiums.length
     this.findLocations(this.stadiums);
   }
-  ngOnDestroy(): void {
-    this.searchService.propStadiums=undefined
-  }
+  
 
   ngOnInit(): void {
 
@@ -47,13 +53,17 @@ export class PropositionsComponent implements OnInit, OnDestroy {
       let geocoder = new google.maps.Geocoder;
       let latlng = { lat: alt, lng: lng };
       let that = this;
+      console.log(that==this)
 
-      geocoder.geocode({ 'location': latlng }, function (results) {
+      geocoder.geocode({ 'location': latlng },  (results) => {
+        console.log(that==this)
+
         if (results[index]) {
-          that.zoom = 11;
-          that.stadiums[index].location = results[0].formatted_address;
-          if(index===that.stadiums.length-1){
-            that.loaded=true;
+
+          this.zoom = 11;
+          this.stadiums[index].location = results[0].formatted_address;
+          if(index===this.stadiums.length-1){
+            this.loaded=true;
           }
         } else {
           console.log('No results found');
@@ -70,6 +80,13 @@ export class PropositionsComponent implements OnInit, OnDestroy {
       this.getCurrentLocation(element.position.alt, element.position.lng, i)
       i++;
     })
-    console.log(stadiums)
+  }
+  completeReservation(index){
+    let match = new Match();
+    match.date= this.date;
+    match.startTime = this.time;
+    match.stadium= this.stadiums[index];
+    this.store.dispatch(reserveMatch({match}))
+    this.router.navigate(['reservation']);
   }
 }

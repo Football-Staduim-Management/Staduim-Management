@@ -28,6 +28,15 @@ public class Match implements Comparable<Match> {
     private User user;
 
     @Column
+    private String player1;
+
+    @Column
+    private String player2;
+
+    @Column
+    private String player3;
+
+    @Column
     private String time;
 
     @Column

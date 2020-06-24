@@ -23,6 +23,8 @@ import { AgmCoreModule } from '@agm/core';
 import { PropositionsComponent } from './component/propositions/propositions.component';
 import { MdpValidatorDirective } from './Directives/mdp-validator.directive'
 import { UserService } from './services/httpServices/user.service';
+import { ReservationComponent } from './component/reservation/reservation.component';
+import { mReducer } from './services/reduxService/reducers/match.reducers';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { UserService } from './services/httpServices/user.service';
     SignupComponent,
     SearchComponent,
     PropositionsComponent,
-    MdpValidatorDirective
+    MdpValidatorDirective,
+    ReservationComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,7 @@ import { UserService } from './services/httpServices/user.service';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    StoreModule.forRoot({currentUser: reducer}),
+    StoreModule.forRoot({currentUser: reducer, match : mReducer}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     RouterModule.forRoot(routes),
     NgxMaterialTimepickerModule,
@@ -49,7 +52,7 @@ import { UserService } from './services/httpServices/user.service';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCJQXd7xxQSc4jM2URmmHV2XGwWBFIcsRg',
       libraries: ['places'] 
-    }),
+    })
   ],
   providers: [LoginService, UserService,
   {

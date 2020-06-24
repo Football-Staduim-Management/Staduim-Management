@@ -15,6 +15,7 @@ export class SignupComponent implements OnInit {
   showError:boolean
   @ViewChild("repassword") repassword : ElementRef;
   password = new FormControl('');
+  signUpLoading : boolean = false;
 
   constructor(private signupService: SignupService, 
               private router : Router, 
@@ -32,13 +33,15 @@ export class SignupComponent implements OnInit {
       this.renderer.setAttribute(this.repassword.nativeElement,"class","form-control is-invalid")
       return
     }
-    
+    this.signUpLoading = true;
     this.signupService.signup(data).subscribe((res)=> {
+      this.signUpLoading = false;
       this.showError=false
       this.userState.setCurrentUser(res)
       this.router.navigateByUrl("/login")
     },
     (error)=>{
+      this.signUpLoading = false;
       this.showError = true
       this.error = error.status === 409 ? "user exist" : error.message
       

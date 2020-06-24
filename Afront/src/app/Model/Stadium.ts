@@ -8,4 +8,5 @@ export class stadium{
     userManager : User
     location : String
     relativePos : number
+    prix : string;
 }

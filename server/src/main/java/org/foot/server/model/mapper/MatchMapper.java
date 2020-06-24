@@ -8,6 +8,6 @@ import org.mapstruct.Mapper;
 
 @Mapper
 public interface MatchMapper {
-    Match StadiumDtotoStadium(MatchDto matchDto);
-    MatchDto StadiumtoStadiumDto(Match match);
+    Match MatchDtotoMatch(MatchDto matchDto);
+    MatchDto MatchtoMatchDto(Match match);
 }

@@ -12,7 +12,8 @@ export class AppComponent {
   title = 'Afront';
   isAuth : Boolean=false;
   
-  constructor(private userState : UserStateService,
+  constructor(
+     private userState : UserStateService,
      private router: Router,
      private loginService : LoginService
      ){
@@ -23,16 +24,13 @@ export class AppComponent {
   }
 
   logout(){
-    this.loginService.logout().subscribe((resp)=>{
-      console.log(resp)
-      
+    this.loginService.logout().subscribe((resp)=>{    
       this.userState.deleteCurrentUser("currentUser");
       this.router.navigateByUrl("/login")
     },(error)=>{
       this.isAuth=false
       this.userState.deleteCurrentUser("currentUser");
       this.router.navigateByUrl("/login")
-      
     })
   }
 

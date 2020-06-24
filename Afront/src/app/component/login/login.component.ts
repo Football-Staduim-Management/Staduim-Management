@@ -16,9 +16,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   authError: boolean = false
   authErrorMessage: string
-  @ViewChild("email") email: ElementRef
   @ViewChild("password") password: ElementRef
-
+  authenticating : boolean = false;
+  email:string;
 
   constructor(
     private loginService: LoginService,
@@ -30,16 +30,10 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   }
   ngAfterViewInit(): void {
-    this.rendere.setAttribute(this.email.nativeElement, "placeholder",
-      this.userState.currentUser.email === "" ? "email" : this.userState.currentUser.email)
-
-    this.rendere.setValue(this.email.nativeElement,
-      this.userState.currentUser.email === "" ? "email" : this.userState.currentUser.email)
+    this.email = this.userState.currentUser.email
   }
 
-
   ngOnInit(): void {
-
   }
 
 
@@ -49,12 +43,12 @@ export class LoginComponent implements OnInit, AfterViewInit {
     user.password = data.password
     this.userState.currentUser.password=user.password
     this.userState.currentUser.email=user.email
+    this.authenticating = true;
     this.loginService.authentication(data).subscribe((res: HttpResponse<any>) => {
       this.authError = false
-      
-
       this.loadUser(this.userState.currentUser.email)
     }, (error: HttpErrorResponse) => {
+      this.authenticating = false;
       this.authError = true
       this.authErrorMessage = error.status === 401 ? "verifier votre email ou mot de passe" : error.message
     })
@@ -62,6 +56,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   loadUser(email: string) {
     this.userService.loadUser(email).subscribe((res: any) => {
+      this.authenticating = false;
       let user: User = new User();
       user.email = res.email;
       user.id = res.id;
@@ -72,6 +67,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
       this.userState.setCurrentUser( user);
       this.router.navigateByUrl("/recherche")
     }, (error: HttpErrorResponse) => {
+      this.authenticating = false;
       this.authError = true
       this.authErrorMessage = error.status === 401 ? "verifier votre email ou mot de passe" : error.message
     })

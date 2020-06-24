@@ -18,3 +18,7 @@ agm-map {
   .p-2 {
     padding: .3rem!important;
 }
+
+.card:focus {
+  outline: 0;
+}

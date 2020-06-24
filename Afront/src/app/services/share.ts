@@ -1,1 +1,1 @@
-export const BaseUrI: string = "http://10.188.67.156:8080";
+export const BaseUrI: string = "http://localhost:85";

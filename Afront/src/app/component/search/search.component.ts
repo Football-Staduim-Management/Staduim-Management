@@ -33,6 +33,9 @@ export class SearchComponent implements OnInit, AfterViewInit {
   searchInf: SearchInfos = new SearchInfos();
   hisearch: Array<SearchInfos>
   locationError: boolean = false
+  searchLoading : boolean = false;
+  errorMessage : string;
+  errorBool:boolean = false;
   constructor(
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
@@ -137,7 +140,8 @@ export class SearchComponent implements OnInit, AfterViewInit {
   }
 
   search() {
-
+    this.errorBool = false;
+    this.searchLoading = true;
     this.searchInf.date = this.dateString
     this.searchInf.time = this.timeString
     this.searchInf.location = this.address
@@ -149,14 +153,20 @@ export class SearchComponent implements OnInit, AfterViewInit {
     localStorage.setItem("hisearch", JSON.stringify(this.hisearch))*/
     this.searchService.searchStadiums(this.searchInf).subscribe((res) => {
       this.searchService.propStadiums = res
+      this.searchLoading = false;
       this.route.navigateByUrl("/propositions")
     }, error => {
+      this.searchLoading = false;
       if (error.status === 401) {
         if (this.userState.isAuth) {
           this.loginService.authentication(this.userState.currentUser).subscribe(() => {
             this.search()
           })
         }
+      }
+      else{
+        this.errorBool = true;
+        this.errorMessage = error
       }
     })
   }

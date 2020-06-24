@@ -1,4 +1,4 @@
-import { Directive, Input } from '@angular/core';
+import { Directive, Input, HostListener, HostBinding } from '@angular/core';
 import { Validator, AbstractControl, NG_VALIDATORS, ValidatorFn } from '@angular/forms';
 
 @Directive({

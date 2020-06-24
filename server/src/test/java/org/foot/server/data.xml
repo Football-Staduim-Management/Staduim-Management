@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <MATCH id='1' stadium_id='1' time='20:30' date='20-08-2020'/>
+    <MATCH id='2' stadium_id='1' time='00:30' date='21-08-2020'/>
+    <MATCH id='3' stadium_id='1' time='19:00' date='20-08-2020'/>
+    <MATCH id='4' stadium_id='1' time='17:30' date='20-08-2020'/>
+    <STADIUM id='1' name='FOOT' />
+</dataset>

@@ -3,8 +3,10 @@ package org.foot.server.service.security;
 import org.foot.server.service.security.Filter.CustomUserDetailService;
 import org.foot.server.service.security.Filter.AuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -32,6 +34,8 @@ public class Configuration extends WebSecurityConfigurerAdapter {
     @Autowired
     private CustomUserDetailService customUserDetailService;
 
+    @Value("${cors.allowedAddress}")
+    private String allowedAddress;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -86,7 +90,7 @@ public class Configuration extends WebSecurityConfigurerAdapter {
             public void addCorsMappings(CorsRegistry registry) {
 
                 registry.addMapping("/**")
-                        .allowedOrigins("http://10.188.67.156:4200", "http://192.168.137.14:4200")
+                        .allowedOrigins(allowedAddress)
                         .allowCredentials(true)
                         .allowedMethods("PUT","POST","GET","DELETE");
             }
