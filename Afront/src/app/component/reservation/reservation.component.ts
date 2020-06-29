@@ -54,6 +54,7 @@ export class ReservationComponent implements OnInit {
       match :  this.match,
       infos : this.reservationForm.getRawValue()
     }
-    
+    console.log(JSON.stringify(reservation))
   }
+
 }
